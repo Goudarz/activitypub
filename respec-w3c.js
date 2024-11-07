@@ -734,7 +734,7 @@ dd{margin-left:0}
 .removeOnSave{display:none}
 }`;const Zs=function(){const e=document.createElement("style");return e.id="respec-mainstyle",e.textContent=Ks,document.head.appendChild(e),e}();var Js=Object.freeze({__proto__:null,name:"core/style",run:function(e){e.noReSpecCSS&&Zs.remove()}});function Qs(){const e=document.createElement("script");e.src="https://www.w3.org/scripts/TR/2021/fixup.js",location.hash&&e.addEventListener("load",(()=>{window.location.href=location.hash}),{once:!0}),document.body.appendChild(e)}const Xs=function(){const e=[{hint:"preconnect",href:"https://www.w3.org"},{hint:"preload",href:"https://www.w3.org/scripts/TR/2021/fixup.js",as:"script"},{hint:"preload",href:to("base.css").href,as:"style"},{hint:"preload",href:to("dark.css").href,as:"style"},{hint:"preload",href:"https://www.w3.org/StyleSheets/TR/2021/logos/W3C",as:"image",corsMode:"anonymous"}],t=document.createDocumentFragment();for(const n of e.map(En))t.appendChild(n);return t}();function eo(e){return t=>{const n=t.querySelector(`head link[href="${e}"]`);t.querySelector("head").append(n)}}function to(e="base.css"){return new URL(`/StyleSheets/TR/2021/${e}`,"https://www.w3.org/")}Xs.appendChild(bn`<link
     rel="stylesheet"
-    href="https://www.w3.org/StyleSheets/TR/2021/base.css"
+    href="base.css"
     class="removeOnSave"
   />`),document.head.querySelector("meta[name=viewport]")||Xs.prepend(bn`<meta
       name="viewport"
