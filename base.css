@@ -196,7 +196,7 @@
 
 		/* Typography */
 		line-height: 1.5;
-		font-family: sans-serif;
+		font-family: Vazirmatn, sans-serif;;
 		widows: 2;
 		orphans: 2;
 		word-wrap: break-word;
@@ -228,7 +228,7 @@
 	#w3c-state {
 		margin-top: 0;
 		margin-bottom: 1.5em;
-		font: 140% sans-serif;   /* Reset all font styling to clear out UA styles */
+		font: 140% Vazirmatn;   /* Reset all font styling to clear out UA styles */
 		font-family: inherit;    /* Inherit the font family. */
 		line-height: 1.2;        /* Keep wrapped headings compact */
 		hyphens: manual;         /* Hyphenated headings look weird */
@@ -372,6 +372,11 @@
 			z-index: 1;
 			box-shadow: -.1em 0 .25em rgba(0,0,0,.1) inset;
 			box-shadow: -.1em 0 .25em var(--tocsidebar-shadow) inset;
+
+			[dir='rtl'] & {
+                right: 0;
+                left: unset;
+            }
 		}
 		body.toc-sidebar #toc h2 {
 			margin-top: .8rem;
@@ -431,6 +436,11 @@
 
 		body:not(.toc-inline) {
 			padding-left: 29em;
+
+			[dir='rtl'] & {
+				padding-right: 29em;
+				padding-left: unset;
+			}
 		}
 		/* See also Overflow section at the bottom */
 
@@ -457,7 +467,7 @@
 	h1, h2, h3, h4, h5, h6, dt {
 		page-break-after: avoid;
 		page-break-inside: avoid;
-		font: 100% sans-serif;   /* Reset all font styling to clear out UA styles */
+		font: 100% Vazirmatn;   /* Reset all font styling to clear out UA styles */
 		font-family: inherit;    /* Inherit the font family. */
 		line-height: 1.2;        /* Keep wrapped headings compact */
 		hyphens: manual;         /* Hyphenated headings look weird */
@@ -1265,6 +1275,10 @@ Possible extra rowspan handling
 		float: left;
 		width: 4rem;
 		white-space: nowrap;
+
+		[dir='rtl'] & {
+			float: right;
+		}
 	}
 	.toc > li li li li .secno {
 		font-size: 85%;
@@ -1273,35 +1287,35 @@ Possible extra rowspan handling
 		font-size: 100%;
 	}
 
-	:not(li) > .toc              { margin-left:  5rem; }
-	.toc .secno                  { margin-left: -5rem; }
-	.toc > li li li .secno       { margin-left: -7rem; }
-	.toc > li li li li .secno    { margin-left: -9rem; }
-	.toc > li li li li li .secno { margin-left: -11rem; }
+	:not(li) > .toc              { margin-left:  5rem; [dir='rtl'] & { margin-right:  5rem; margin-left: unset; }}
+	.toc .secno                  { margin-left: -5rem; [dir='rtl'] & { margin-right:  -5rem; margin-left: unset; }}
+	.toc > li li li .secno       { margin-left: -7rem; [dir='rtl'] & { margin-right:  -7rem; margin-left: unset; }}
+	.toc > li li li li .secno    { margin-left: -9rem; [dir='rtl'] & { margin-right:  -9rem; margin-left: unset; }}
+	.toc > li li li li li .secno { margin-left: -11rem; [dir='rtl'] & { margin-right:  -11rem; margin-left: unset; }}
 
 	/* Tighten up indentation in narrow ToCs */
 	@media (max-width: 30em) {
-		:not(li) > .toc              { margin-left:  4rem; }
-		.toc .secno                  { margin-left: -4rem; }
-		.toc > li li li              { margin-left:  1rem; }
-		.toc > li li li .secno       { margin-left: -5rem; }
-		.toc > li li li li .secno    { margin-left: -6rem; }
-		.toc > li li li li li .secno { margin-left: -7rem; }
+		:not(li) > .toc              { margin-left:  4rem; [dir='rtl'] & { margin-right:  4rem; margin-left: unset; }}
+		.toc .secno                  { margin-left: -4rem; [dir='rtl'] & { margin-right:  -4rem; margin-left: unset; }}
+		.toc > li li li              { margin-left:  1rem; [dir='rtl'] & { margin-right:  1rem; margin-left: unset; }}
+		.toc > li li li .secno       { margin-left: -5rem; [dir='rtl'] & { margin-right:  -5rem; margin-left: unset; }}
+		.toc > li li li li .secno    { margin-left: -6rem; [dir='rtl'] & { margin-right:  -6rem; margin-left: unset; }}
+		.toc > li li li li li .secno { margin-left: -7rem; [dir='rtl'] & { margin-right:  -7rem; margin-left: unset; }}
 	}
 	@media screen and (min-width: 78em) {
-		body:not(.toc-inline) :not(li) > .toc              { margin-left:  4rem; }
-		body:not(.toc-inline) .toc .secno                  { margin-left: -4rem; }
-		body:not(.toc-inline) .toc > li li li              { margin-left:  1rem; }
-		body:not(.toc-inline) .toc > li li li .secno       { margin-left: -5rem; }
-		body:not(.toc-inline) .toc > li li li li .secno    { margin-left: -6rem; }
-		body:not(.toc-inline) .toc > li li li li li .secno { margin-left: -7rem; }
+		body:not(.toc-inline) :not(li) > .toc              { margin-left:  4rem; [dir='rtl'] & { margin-right:  4rem; margin-left: unset; }}
+		body:not(.toc-inline) .toc .secno                  { margin-left: -4rem; [dir='rtl'] & { margin-right:  -4rem; margin-left: unset; }}
+		body:not(.toc-inline) .toc > li li li              { margin-left:  1rem; [dir='rtl'] & { margin-right:  1rem; margin-left: unset; }}
+		body:not(.toc-inline) .toc > li li li .secno       { margin-left: -5rem; [dir='rtl'] & { margin-right:  -5rem; margin-left: unset; }}
+		body:not(.toc-inline) .toc > li li li li .secno    { margin-left: -6rem; [dir='rtl'] & { margin-right:  -6rem; margin-left: unset; }}
+		body:not(.toc-inline) .toc > li li li li li .secno { margin-left: -7rem; [dir='rtl'] & { margin-right:  -7rem; margin-left: unset; }}
 	}
-	body.toc-sidebar #toc :not(li) > .toc              { margin-left:  4rem; }
-	body.toc-sidebar #toc .toc .secno                  { margin-left: -4rem; }
-	body.toc-sidebar #toc .toc > li li li              { margin-left:  1rem; }
-	body.toc-sidebar #toc .toc > li li li .secno       { margin-left: -5rem; }
-	body.toc-sidebar #toc .toc > li li li li .secno    { margin-left: -6rem; }
-	body.toc-sidebar #toc .toc > li li li li li .secno { margin-left: -7rem; }
+	body.toc-sidebar #toc :not(li) > .toc              { margin-left:  4rem; [dir='rtl'] & { margin-right:  4rem; margin-left: unset; }}
+	body.toc-sidebar #toc .toc .secno                  { margin-left: -4rem; [dir='rtl'] & { margin-right:  -4rem; margin-left: unset; }}
+	body.toc-sidebar #toc .toc > li li li              { margin-left:  1rem; [dir='rtl'] & { margin-right:  1rem; margin-left: unset; }}
+	body.toc-sidebar #toc .toc > li li li .secno       { margin-left: -5rem; [dir='rtl'] & { margin-right:  -5rem; margin-left: unset; }}
+	body.toc-sidebar #toc .toc > li li li li .secno    { margin-left: -6rem; [dir='rtl'] & { margin-right:  -6rem; margin-left: unset; }}
+	body.toc-sidebar #toc .toc > li li li li li .secno { margin-left: -7rem; [dir='rtl'] & { margin-right:  -7rem; margin-left: unset; }}
 
 	.toc li {
 		clear: both;
@@ -1431,7 +1445,7 @@ Possible extra rowspan handling
 	background: transparent;
 	color: white;
 	color: var(--outdated-text);
-	font:1em sans-serif;
+	font:1em Vazirmatn, sans-serif;;
 	text-align:center;
 }
 
@@ -1584,3 +1598,5 @@ Possible extra rowspan handling
 			bottom: unset;
 		}
 	}
+
+:lang(fa-IR) ol {list-style: arabic-indic;}
