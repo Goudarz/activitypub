@@ -12,7 +12,7 @@ ActivityPub was developed by the [Social Web Working Group](https://www.w3.org/S
 
 - The [ActivityPub specification](https://www.w3.org/TR/activitypub/) is the official document that describes the protocol.
 - The [errata](https://www.w3.org/wiki/ActivityPub_errata) pages shows known errors in the specification.
-- The [Editor's Draft](https://w3.github.io/activitypub/) incorporates the corrected errata directly into the specification text.
+- The [Editor's Draft](https://w3c.github.io/activitypub/) incorporates the corrected errata directly into the specification text.
 - The [SocialCG](https://www.w3.org/community/socialcg/) is the community group that maintains the specification. It meets regularly to discuss the specification and its implementations.
 - The [ActivityPub Primer](https://www.w3.org/wiki/ActivityPub/Primer) gives deeper explanations of topics described in the specification.
 - The [ActivityPub WebFinger profile](https://swicg.github.io/activitypub-webfinger/) describes how to use WebFinger with ActivityPub.
