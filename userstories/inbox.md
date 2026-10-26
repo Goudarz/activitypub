@@ -1,29 +1,29 @@
-# Inbox
+# صندوق ورودی
 
-From https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Inbox
+برگرفته از https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Inbox
 
-> 1. Jake is bored at work. He checks his social inbox stream to see what his friends, family, and coworkers are up to.
-> 2. Jake sees in his social stream a note by Tammy about her new apartment. Tammy is his friend.
-> 3. Jake sees in his social stream a photo by Edith from her concert last night. Jake follows Edith but Edith doesn't know Jake. Edith has thousands of followers.
-> 4. Jake sees in his social stream a video from Damon. Damon and Jake are both in the "Boxing Fans" group. Damon posted the video to the group.
-> 5. Jake sees in his social stream a sound file from Carol. Carol is Jake's wife. The sound file is a reminder to stop for groceries after work. Carol posted the sound file only for Jake.
-> 6. Jake sees in his social stream that his friend Tammy has added a new friend, Denise. Jake remembers Denise from high school. Jake requests to add Denise as a friend, too.
+> 1. جیک (Jake) سر کار حوصله‌اش سر رفته است. او جریان صندوق ورودی اجتماعی‌اش را بررسی می‌کند تا ببیند دوستان، خانواده و همکارانش مشغول چه کاری هستند.
+> 2. جیک در جریان اجتماعی‌اش یادداشتی از تامی (Tammy) دربارهٔ آپارتمان جدیدش می‌بیند. تامی دوست اوست.
+> 3. جیک در جریان اجتماعی‌اش عکسی از ادیت (Edith) از کنسرت دیشبش می‌بیند. جیک ادیت را دنبال می‌کند اما ادیت جیک را نمی‌شناسد. ادیت هزاران دنبال‌کننده دارد.
+> 4. جیک در جریان اجتماعی‌اش ویدیویی از دیمون (Damon) می‌بیند. دیمون و جیک هر دو عضو گروه «طرفداران بوکس» (Boxing Fans) هستند. دیمون ویدیو را در گروه منتشر کرده است.
+> 5. جیک در جریان اجتماعی‌اش یک فایل صوتی از کارول (Carol) می‌بیند. کارول همسر جیک است. این فایل صوتی یادآوری است که بعد از کار برای خرید مواد غذایی سری به فروشگاه بزند. کارول فایل صوتی را فقط برای جیک منتشر کرده است.
+> 6. جیک در جریان اجتماعی‌اش می‌بیند که دوستش تامی دوست جدیدی به نام دنیس (Denise) اضافه کرده است. جیک دنیس را از دوران دبیرستان به یاد می‌آورد. جیک درخواست می‌دهد که دنیس را هم به‌عنوان دوست اضافه کند.
 
-**NOTE:** Incomplete.  Much of this can be gleaned from the "Reading a
-  user's recent posts" and "Following a person" user stories though,
-  with the notable exception of groups and private addressing.  I
-  believe this should be fairly straightforward though, since this is
-  just changing who the addressing points to (including pointing to
-  groups which are collections of recipients).
+**یادداشت:** ناقص است.  بخش زیادی از این موارد را می‌توان از داستان‌های کاربری
+  «خواندن پست‌های اخیر یک کاربر» و «دنبال کردن یک شخص» دریافت،
+  به‌جز موارد مهمی مانند گروه‌ها و نشانی‌دهی خصوصی.  البته
+  به گمانم این موارد نیز نسبتاً ساده باشند، چرا که فقط
+  مقصد نشانی‌دهی تغییر می‌کند (از جمله اشاره به
+  گروه‌ها که مجموعه‌هایی از گیرندگان هستند).
 
-## 1. Checking your inbox
+## ۱. بررسی صندوق ورودی
 
-## 2. Reading posts shared between friends
+## ۲. خواندن پست‌هایی که میان دوستان به اشتراک گذاشته شده‌اند
 
-## 3. Reading posts submitted to someone's public feed
+## ۳. خواندن پست‌هایی که در خوراک عمومی کسی منتشر شده‌اند
 
-## 4. Reading posts submitted to a group
+## ۴. خواندن پست‌هایی که در یک گروه منتشر شده‌اند
 
-## 5. Reading a post shared privately
+## ۵. خواندن پستی که به‌صورت خصوصی به اشتراک گذاشته شده است
 
-## 6. Following someone based on someone else's follow
+## ۶. دنبال کردن کسی بر اساس دنبال کردنِ شخصی دیگر

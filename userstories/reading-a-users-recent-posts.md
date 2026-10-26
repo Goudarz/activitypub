@@ -1,13 +1,13 @@
-# Reading a user's recent posts
+# خواندن پست‌های اخیر یک کاربر
 
-From https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Reading_a_user.27s_recent_posts
+برگرفته از https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Reading_a_user.27s_recent_posts
 
-> 1. Iris finds a comment by Sam on one of her photos funny. She'd like to read more posts by Sam.
-> 2. Iris reads the latest notes by Sam. She also reviews his latest photos.
+> 1. آیریس (Iris) نظری را که سم (Sam) زیر یکی از عکس‌هایش نوشته خنده‌دار می‌یابد. او دوست دارد پست‌های بیشتری از سم بخواند.
+> 2. آیریس آخرین یادداشت‌های سم را می‌خواند. او همچنین آخرین عکس‌های سم را مرور می‌کند.
 
-## 1. Finding more content from an author
+## ۱. یافتن محتوای بیشتر از یک نویسنده
 
-Iris finds a comment by Sam on one of her photos funny.
+آیریس نظری را که سم زیر یکی از عکس‌هایش نوشته خنده‌دار می‌یابد.
 
 ```
 GET /api/user/iris/inbox
@@ -49,21 +49,21 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-## 2. Reading recent content from an author
+## ۲. خواندن محتوای اخیر یک نویسنده
 
-Iris would like more such comments on her pets by Sam.  If Iris were
-using a web interface, she might merely visit Sam's website at
-http://samsplace.example/sam/, linked from the `actor` field, where she
-could read Sam's latest jokes and japes in her browser in plain HTML.
+آیریس دوست دارد نظرهای بیشتری از این دست از سم دربارهٔ حیوانات خانگی‌اش ببیند.  اگر آیریس
+از یک رابط وب استفاده می‌کرد، کافی بود به وب‌سایت سم در
+http://samsplace.example/sam/ سر بزند که از فیلد `actor` به آن پیوند داده شده است؛ در آنجا
+می‌توانست آخرین شوخی‌ها و لطیفه‌های سم را در مرورگرش به‌صورت HTML ساده بخواند.
 
-However, right now she's using a mobile client.  She clicks the "View
-Sam's latest post" button.  Behind the scenes, her client does a GET
-request to http://samsplace.example/sam/ and sees
-[embedded json-ld](http://www.w3.org/TR/json-ld/#embedding-json-ld-in-html-documents)
-describing an ActivityStreams Actor type.  (Note: this method still
-needs to be agreed upon, see
-[issue 24](https://github.com/w3c-social/activitypub/issues/24)
-for details)
+اما در حال حاضر او از یک کلاینت تلفن همراه استفاده می‌کند.  روی دکمهٔ «مشاهدهٔ
+آخرین پست سم» می‌زند.  در پشت صحنه، کلاینت او یک درخواست GET
+به http://samsplace.example/sam/ می‌فرستد و
+[json-ld جاسازی‌شده](http://www.w3.org/TR/json-ld/#embedding-json-ld-in-html-documents)
+را می‌بیند که یک نوع Actor از ActivityStreams را توصیف می‌کند.  (یادداشت: هنوز باید
+دربارهٔ این روش به توافق رسید؛ برای جزئیات
+[مسئلهٔ ۲۴](https://github.com/w3c-social/activitypub/issues/24)
+را ببینید)
 
 
 ```
@@ -102,7 +102,7 @@ Content-Type: text/html
 </html>
 ```
 
-Iris's client pulls up Sam's outbox
+کلاینت آیریس صندوق خروجی سم را می‌آورد
 
 ```
 GET https://samsplace.example/feed.json
@@ -155,5 +155,5 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-Iris's mobile client displays Sam's recent posts in a new tab.  That
-chicken joke sure was a good one!
+کلاینت تلفن همراه آیریس پست‌های اخیر سم را در یک زبانهٔ جدید نمایش می‌دهد.  آن
+شوخی مرغ واقعاً بامزه بود!

@@ -1,13 +1,13 @@
-# Security Policy
+# سیاست امنیتی
 
-## Supported Versions
+## نسخه‌های پشتیبانی‌شده
 
-These versions of ActivityPub are supported.
+این نسخه‌های اکتیویتی‌پاب پشتیبانی می‌شوند.
 
-| Version  | Supported          |
-| -------  | ------------------ |
-| 20180123 | :white_check_mark: |
+| نسخه | پشتیبانی‌شده |
+| ---- | ------------ |
+| 20180123 (توصیه‌نامهٔ &#x2067;۳ بهمن ۱۳۹۶&#x2069;) | :white_check_mark: |
 
-## Reporting a Vulnerability
+## گزارش یک آسیب‌پذیری
 
-Send a vulnerability report to evan -at- prodromou.name.
+گزارش آسیب‌پذیری را به نشانی evan -at- prodromou.name بفرستید.

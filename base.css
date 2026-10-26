@@ -297,6 +297,13 @@
 			border-top-right-radius: 2rem;
 			box-shadow: 0 0 2px;
 			font-size: 1.5em;
+
+			[dir='rtl'] & {
+				right: 0;
+				left: unset;
+				border-top-right-radius: unset;
+				border-top-left-radius: 2rem;
+			}
 		}
 		#toc-nav > a {
 			display: block;
@@ -309,6 +316,11 @@
 			box-shadow: 0 0 2px;
 			border: none;
 			border-top-right-radius: 1.33em;
+
+			[dir='rtl'] & {
+				border-top-right-radius: unset;
+				border-top-left-radius: 1.33em;
+			}
 
 			color: #707070;
 			color: var(--tocnav-normal-text);
@@ -346,6 +358,11 @@
 		}
 		#toc-nav > a > span + span {
 			padding-right: 0.2em;
+
+			[dir='rtl'] & {
+				padding-right: unset;
+				padding-left: 0.2em;
+			}
 		}
 	}
 
@@ -374,9 +391,12 @@
 			box-shadow: -.1em 0 .25em var(--tocsidebar-shadow) inset;
 
 			[dir='rtl'] & {
-                right: 0;
-                left: unset;
-            }
+				right: 0;
+				left: unset;
+				padding-left: 1em;
+				padding-right: calc(1em + 26px);
+				box-shadow: .1em 0 .25em var(--tocsidebar-shadow) inset;
+			}
 		}
 		body.toc-sidebar #toc h2 {
 			margin-top: .8rem;
@@ -422,6 +442,14 @@
 			z-index: 1;
 			box-shadow: -.1em 0 .25em rgba(0,0,0,.1) inset;
 			box-shadow: -.1em 0 .25em var(--tocsidebar-shadow) inset;
+
+			[dir='rtl'] & {
+				right: 0;
+				left: unset;
+				padding-left: 1em;
+				padding-right: calc(1em + 26px);
+				box-shadow: .1em 0 .25em var(--tocsidebar-shadow) inset;
+			}
 		}
 		body:not(.toc-inline) #toc h2 {
 			margin-top: .8rem;
@@ -1268,7 +1296,7 @@ Possible extra rowspan handling
 
 	.toc > li             { margin: 1.5rem 0;    }
 	.toc > li li          { margin: 0.3rem 0;    }
-	.toc > li li li       { margin-left: 2rem;   }
+	.toc > li li li       { margin-left: 2rem;   [dir='rtl'] & { margin-right: 2rem; margin-left: unset; }}
 
 	/* Section numbers in a column of their own */
 	.toc .secno {
@@ -1278,6 +1306,8 @@ Possible extra rowspan handling
 
 		[dir='rtl'] & {
 			float: right;
+			/* The number is LTR inside <bdi>, so align it to the start of the RTL column. */
+			text-align: right;
 		}
 	}
 	.toc > li li li li .secno {
@@ -1600,3 +1630,35 @@ Possible extra rowspan handling
 	}
 
 :lang(fa-IR) ol {list-style: arabic-indic;}
+/** RTL section numbers in headings **************************************************/
+
+	/* In RTL the trailing space inside the LTR <bdi class="secno"> lands on the
+	   wrong side, so give the number explicit room before the heading text. */
+	[dir='rtl'] :is(h2, h3, h4, h5, h6) > .secno {
+		margin-left: 0.4em;
+	}
+
+	/* URLs shown as link text in the header are LTR; let their own content set the
+	   direction so the trailing "/" does not jump to the start of the line. */
+	[dir='rtl'] .head dd a {
+		unicode-bidi: plaintext;
+	}
+
+	/* Keep reference labels such as [activitystreams-core] on one line. */
+	[dir='rtl'] a.bibref {
+		white-space: nowrap;
+	}
+
+	/* Persian digits are "European numbers" to the bidi algorithm, so a Persian date
+	   right after Latin text (e.g. "... W3C ۴ آبان ۱۴۰۵") gets pulled into the Latin
+	   run. Isolate the status and the date from each other. */
+	[dir='rtl'] #w3c-state > a,
+	[dir='rtl'] #w3c-state > time {
+		unicode-bidi: isolate;
+	}
+
+	/* Bibliography entries are English; let each entry take its direction from its
+	   own text so punctuation stays at the correct end. */
+	[dir='rtl'] dl.bibliography dd {
+		unicode-bidi: plaintext;
+	}

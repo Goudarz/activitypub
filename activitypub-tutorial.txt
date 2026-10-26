@@ -1,30 +1,31 @@
-NOTE!  The ActivityPub spec now contains all the stuff from this tutorial
-and some more!  This is the old version.  Check out the new version here:
+توجه!  مشخصهٔ اکتیویتی‌پاب اکنون همهٔ مطالب این آموزش و مطالب بیشتری را
+در بر دارد!  این نسخهٔ قدیمی است.  نسخهٔ جدید را اینجا ببینید:
   https://www.w3.org/TR/activitypub/#Overview
 
-ActivityPub tutorial
-====================
+آموزش اکتیویتی‌پاب (ActivityPub)
+================================
 
-ActivityPub is two things:
+اکتیویتی‌پاب دو چیز است:
 
- - *A server to server federation protocol*
-   (so decentralized websites can share information)
- - *A client to server protocol*
-   (so users can communicate with ActivityPub using servers,
-   from a phone or desktop or web application or whatever)
+ - *یک پروتکل فدراسیون از سرور به سرور*
+   (تا وب‌سایت‌های غیرمتمرکز بتوانند اطلاعات را به اشتراک بگذارند)
+ - *یک پروتکل از کلاینت به سرور*
+   (تا کاربران بتوانند با استفاده از سرورها، از طریق تلفن همراه،
+   رایانهٔ رومیزی، یک برنامهٔ تحت وب یا هر چیز دیگری با اکتیویتی‌پاب
+   ارتباط برقرار کنند)
 
-ActivityPub implementations can implement just one of these things or
-both of them.  However, once you've implemented one, it isn't too many
-steps to implement the other, and there are a lot of benefits to both
-(making your website part of the decentralized social web, and being
-able to use clients and client libraries that work across a wide variety
-of social websites).
+پیاده‌سازی‌های اکتیویتی‌پاب می‌توانند تنها یکی از این دو را پیاده‌سازی
+کنند یا هر دو را.  با این حال، وقتی یکی را پیاده‌سازی کردید، پیاده‌سازی
+دیگری کار چندانی نمی‌برد و هر دو مزایای زیادی دارند (وب‌سایت شما بخشی
+از وب اجتماعی غیرمتمرکز می‌شود و می‌توانید از کلاینت‌ها و کتابخانه‌های
+کلاینتی استفاده کنید که با طیف گسترده‌ای از وب‌سایت‌های اجتماعی کار
+می‌کنند).
 
-In ActivityPub, every actor (users are represented as "actors" here)
-has:
+در اکتیویتی‌پاب، هر کنشگر (actor؛ کاربران در اینجا به‌صورت «کنشگر»
+بازنمایی می‌شوند) این موارد را دارد:
 
- - An INBOX:  How they get messages from the world
- - An OUTBOX: How they send messages to others
+ - یک INBOX (صندوق ورودی):  راهی که پیام‌ها را از دنیا دریافت می‌کند
+ - یک OUTBOX (صندوق خروجی): راهی که پیام‌ها را برای دیگران می‌فرستد
 
              .--------.
      .--.    | INBOX  |  <- receive messages
@@ -35,11 +36,15 @@ has:
     '----'   | OUTBOX |  -> send messages
              '--------'
 
-These are endpoints, or really, just URLs which are listed in the
-ActivityPub actor's ActivityStreams description.  (More on
-ActivityStreams later.)
+(نمودار: کنشگر پیام‌ها را از طریق INBOX دریافت می‌کند و از طریق OUTBOX
+می‌فرستد.)
 
-Here's an example of the record of our friend Alyssa P. Hacker:
+این‌ها نقطه‌های پایانی (endpoint) هستند، یا در واقع صرفاً نشانی‌های URL
+که در توصیف ActivityStreams کنشگرِ اکتیویتی‌پاب فهرست شده‌اند.
+(دربارهٔ ActivityStreams در ادامه بیشتر خواهیم گفت.)
+
+در اینجا نمونه‌ای از رکورد دوستمان، آلیسا پی. هکر (Alyssa P. Hacker)، را
+می‌بینید:
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Person",
@@ -53,17 +58,16 @@ Here's an example of the record of our friend Alyssa P. Hacker:
    "following": "https://social.example/alyssa/following/",
    "likes": "https://social.example/alyssa/likes/"}
 
-ActivityStreams objects are JSON-LD documents.  If you know what
-JSON-LD is, you can take advantage of the cool linked data approaches
-provided by JSON-LD.  If you don't, don't worry, JSON-LD documents and
-ActivityStreams can be understood as plain old simple JSON.  (If
-you're going to add extensions, that's the point at which JSON-LD
-really helps you out.)
+اشیاء ActivityStreams اسناد JSON-LD هستند.  اگر می‌دانید JSON-LD چیست،
+می‌توانید از رویکردهای جالب دادهٔ پیوندی (linked data) که JSON-LD فراهم
+می‌کند بهره ببرید.  اگر نمی‌دانید، نگران نباشید؛ اسناد JSON-LD و
+ActivityStreams را می‌توان همان JSON سادهٔ معمولی در نظر گرفت.  (اگر قصد
+دارید افزونه‌ای اضافه کنید، آنجاست که JSON-LD واقعاً به کمکتان می‌آید.)
 
-So, okay.  Alyssa wants to talk to her friends, and her friends want
-to talk to her!  Luckily these "inbox" and "outbox" things can help us
-out.  They both behave differently for GET and POST.  Let's see how
-that works:
+خب، بسیار خوب.  آلیسا می‌خواهد با دوستانش صحبت کند و دوستانش هم
+می‌خواهند با او صحبت کنند!  خوشبختانه این «صندوق ورودی» و «صندوق خروجی»
+می‌توانند به ما کمک کنند.  رفتار هر دوی آن‌ها برای GET و POST متفاوت است.
+بیایید ببینیم این چگونه کار می‌کند:
 
 
                actor               send messages
@@ -85,29 +89,33 @@ that works:
           messages / posts         world can read
               content           messages from actor
 
-Hey nice, so just as a recap:
+(نمودار: کنشگر پیام‌های دریافتی را با GET از INBOX می‌خواند؛ بقیهٔ دنیا با
+POST به INBOX کنشگر پیام می‌فرستد (فدراسیون!)؛ کنشگر با POST به OUTBOX
+پیام یا محتوا منتشر می‌کند؛ و دنیای بیرون می‌تواند با GET از OUTBOX
+پیام‌های کنشگر را بخواند.)
 
- - You can POST to someone's inbox to send them a message
-   (server-to-server / federation only... this *is* federation!)
- - You can GET from your inbox to read your latest messages
-   (client-to-server; this is like reading your social
-   network stream)
- - You can POST to your outbox to send messages to the world
-   (client-to-server)
- - You can GET from someone's outbox to see what messages they've
-   posted (or at least the ones you're authorized to see).
-   (client-to-server and/or server-to-server)
- 
-Of course, if that last one (GET'ing from someone's outbox) was the
-only way to see what people have sent, this wouldn't be a very
-efficient federation protocol!  Indeed, federation happens usually by
-servers posting messages sent by actors to actors on other servers'
-inboxes.
+عالی شد، پس برای جمع‌بندی:
 
-Let's see an example!  Let's say Alyssa wants to catch up with her
-friend, Ben Bitdiddle.  She lent him a book recently and she wants to
-make sure he returns it to her.  Here's the message she composes, as
-an ActivityStreams object:
+ - می‌توانید با POST کردن به صندوق ورودی کسی، برایش پیام بفرستید
+   (فقط سرور به سرور / فدراسیون... فدراسیون *همین* است!)
+ - می‌توانید با GET کردن از صندوق ورودی خودتان، آخرین پیام‌هایتان را
+   بخوانید (کلاینت به سرور؛ مثل خواندن جریان شبکهٔ اجتماعی‌تان)
+ - می‌توانید با POST کردن به صندوق خروجی خودتان، برای دنیا پیام بفرستید
+   (کلاینت به سرور)
+ - می‌توانید با GET کردن از صندوق خروجی کسی، ببینید چه پیام‌هایی منتشر
+   کرده است (یا دست‌کم آن‌هایی که مجاز به دیدنشان هستید).
+   (کلاینت به سرور و/یا سرور به سرور)
+
+البته اگر مورد آخر (GET کردن از صندوق خروجی کسی) تنها راه دیدن
+چیزهایی بود که دیگران فرستاده‌اند، این پروتکل فدراسیون چندان کارآمدی
+نبود!  در واقع، فدراسیون معمولاً این‌گونه رخ می‌دهد که سرورها پیام‌هایی
+را که کنشگرها فرستاده‌اند، به صندوق‌های ورودی کنشگرهای سرورهای دیگر
+POST می‌کنند.
+
+بیایید یک نمونه ببینیم!  فرض کنید آلیسا می‌خواهد حال دوستش، بن بیت‌دیدل
+(Ben Bitdiddle)، را بپرسد.  او اخیراً کتابی به بن قرض داده و می‌خواهد
+مطمئن شود که بن آن را برمی‌گرداند.  این پیامی است که او به‌صورت یک شیء
+ActivityStreams می‌نویسد:
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Note",
@@ -115,7 +123,9 @@ an ActivityStreams object:
    "attributedTo": "https://social.example/alyssa/",
    "content": "Say, did you finish reading that book I lent you?"}
 
-This is a note addressed to Ben.  She POSTs it to her outbox.
+این یک یادداشت (Note) خطاب به بن است (متن آن: «راستی، خواندن کتابی که
+بهت قرض دادم را تمام کردی؟»).  آلیسا آن را به صندوق خروجی خود POST
+می‌کند.
 
      .--.  
     ; o o;               .---------.
@@ -124,12 +134,14 @@ This is a note addressed to Ben.  She POSTs it to her outbox.
     |  A |               '---------'
     '----' 
 
-Since this is a non-activity object, the server recognizes that this
-is an object being newly created, and does the courtesy of wrapping it
-in a Create activity. (Activities sent around in ActivityPub generally
-follow the pattern of some activity by some author being taken on some
-object.  In this case the activity is a Create of a Note object,
-posted by a Person.)
+(نمودار: آلیسا پیام را به صندوق خروجی خودش POST می‌کند.)
+
+از آنجا که این یک شیء غیرفعالیتی است، سرور تشخیص می‌دهد که این شیئی
+است که تازه ایجاد می‌شود و از سر لطف آن را درون یک فعالیت Create
+می‌پیچد.  (فعالیت‌هایی که در اکتیویتی‌پاب جابه‌جا می‌شوند، عموماً از این
+الگو پیروی می‌کنند: فعالیتی از سوی یک نویسنده روی یک شیء انجام می‌شود.
+در این مورد، فعالیت عبارت است از Create یک شیء Note که یک Person منتشر
+کرده است.)
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Create",
@@ -142,8 +154,8 @@ posted by a Person.)
               "to": ["https://chatty.example/ben/"],
               "content": "Say, did you finish reading that book I lent you?"}}
 
-Alyssa's server looks up Ben's ActivityStreams actor object, finds his
-inbox endpoint, and POST's her object to his inbox.
+سرور آلیسا شیء کنشگرِ ActivityStreams بن را پیدا می‌کند، نقطهٔ پایانی
+صندوق ورودی او را می‌یابد و شیء آلیسا را به صندوق ورودی بن POST می‌کند.
 
 
    .----------.
@@ -156,10 +168,12 @@ inbox endpoint, and POST's her object to his inbox.
    |          |.;
    '----------'  
 
-Technically these are two separate steps... one is client to server
-communication, and one is server to server communication (federation).
-But, since we're using them both in this example, we can abstractly
-think of this as being a streamlined submission from outbox to inbox:
+(نمودار: سرور آلیسا پیام را به صندوق ورودی بن POST می‌کند.)
+
+از نظر فنی این‌ها دو مرحلهٔ جداگانه‌اند... یکی ارتباط کلاینت به سرور
+است و دیگری ارتباط سرور به سرور (فدراسیون).  اما چون در این نمونه از هر
+دو استفاده می‌کنیم، می‌توانیم به‌طور انتزاعی آن را یک ارسال یکپارچه از
+صندوق خروجی به صندوق ورودی در نظر بگیریم:
 
      .--.                                     .--. 
     ; o o;  .---------.           .-------.  ;o o ;
@@ -168,10 +182,12 @@ think of this as being a streamlined submission from outbox to inbox:
     |  A |  '---------'           '-------'  | B  |
     '----'                                   '----'
 
-Cool!  A while later, Alyssa checks what new messages she's gotten.
-Her phone polls her inbox via GET, and amongst a bunch of cat videos
-posted by friends and photos of her nephew posted her sister, she sees
-the following:
+(نمودار: پیام از صندوق خروجی آلیسا به صندوق ورودی بن می‌رود.)
+
+عالی!  کمی بعد، آلیسا بررسی می‌کند که چه پیام‌های تازه‌ای دریافت کرده
+است.  تلفن او با GET صندوق ورودی‌اش را بررسی می‌کند و در میان انبوهی از
+ویدیوهای گربه که دوستانش منتشر کرده‌اند و عکس‌های برادرزاده‌اش که خواهرش
+منتشر کرده، این را می‌بیند:
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Create",
@@ -187,7 +203,9 @@ the following:
                           <p>I was reviewing the section on register machines,
                              since it's been a while since I wrote one.</p>"}}
 
-Alyssa is relieved, and likes Ben's post:
+(بن نوشته است: «آخ، آره، ببخشید، فردا پسش می‌دهم.  داشتم بخش ماشین‌های
+ثبات (register machine) را مرور می‌کردم، چون مدتی است که یکی
+ننوشته‌ام».)  خیال آلیسا راحت می‌شود و پست بن را می‌پسندد:
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Like",
@@ -196,13 +214,14 @@ Alyssa is relieved, and likes Ben's post:
    "author": "https://social.example/alyssa/",
    "object": "https://chatty.example/ben/p/51086"}
 
-She POSTs this message to her outbox.  (Since it's an activity, her
-server knows it doesn't need to wrap it in a Create object.)
+او این پیام را به صندوق خروجی خود POST می‌کند.  (چون این خودش یک فعالیت
+است، سرورش می‌داند که لازم نیست آن را درون یک شیء Create بپیچد.)
 
-Feeling happy about things, she decides to post a public message to
-her followers.  Soon the following message is blasted to all the
-members of her followers collection, and since it has the special
-Public group addressed, is generally readable by anyone.
+آلیسا که حالش خوب است، تصمیم می‌گیرد یک پیام عمومی برای دنبال‌کنندگانش
+منتشر کند.  به‌زودی پیام زیر برای همهٔ اعضای مجموعهٔ دنبال‌کنندگان او
+فرستاده می‌شود و چون گروه ویژهٔ Public (عمومی) هم در نشانی‌های آن آمده
+است، عموماً هر کسی می‌تواند آن را بخواند (متن پیام: «قرض دادن کتاب به
+دوستان خوب است.  پس گرفتنشان از آن هم بهتر! :)»).
 
   {"@context": "https://www.w3.org/ns/activitystreams",
    "type": "Create",

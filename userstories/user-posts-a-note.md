@@ -1,14 +1,14 @@
-# User Posts a Note
+# کاربر یک یادداشت منتشر می‌کند
 
-From https://www.w3.org/wiki/Socialwg/Social_API/User_stories#User_posts_a_note
+برگرفته از https://www.w3.org/wiki/Socialwg/Social_API/User_stories#User_posts_a_note
 
-> 1. Eric writes a short note to be shared with his followers.
-> 2. After posting the note, he notices a spelling error. He edits the note and re-posts it.
-> 3. Later, Eric decides that the information in the note is incorrect. He deletes the note.
+> 1. اریک (Eric) یادداشت کوتاهی می‌نویسد تا با دنبال‌کنندگانش به اشتراک بگذارد.
+> 2. پس از انتشار یادداشت، متوجه یک غلط املایی می‌شود. یادداشت را ویرایش می‌کند و دوباره منتشر می‌کند.
+> 3. بعدها اریک به این نتیجه می‌رسد که اطلاعات یادداشت نادرست است. یادداشت را حذف می‌کند.
 
-## 1. Posting a note
+## ۱. انتشار یک یادداشت
 
-Eric writes a post in his client and it submits something like this to his outbox (feed)::
+اریک در کلاینت خود پستی می‌نویسد و کلاینت چیزی شبیه به این را به صندوق خروجی (خوراک) او ارسال می‌کند::
 
 ```
 POST /api/user/eric/feed HTTP/1.1
@@ -32,8 +32,8 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-The server responds by giving you back the full object activity
-and object that it just created::
+سرور در پاسخ، فعالیت کامل و شیئی را که هم‌اکنون ایجاد کرده است
+به شما بازمی‌گرداند::
 
 ```
 {
@@ -58,9 +58,9 @@ and object that it just created::
 }
 ```
 
-## 2. Updating a note
+## ۲. به‌روزرسانی یک یادداشت
 
-He notices he made a typo and updates the note with his collection::
+متوجه می‌شود که غلط تایپی داشته و یادداشت را با مجموعهٔ خود به‌روزرسانی می‌کند::
 ```
 POST /api/user/eric/feed HTTP/1.1
 Host: example.se
@@ -84,7 +84,7 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-This agains just sends you back the activity you just posted
+این بار نیز سرور صرفاً فعالیتی را که هم‌اکنون ارسال کردید به شما بازمی‌گرداند
 
 ```
 {
@@ -110,9 +110,9 @@ This agains just sends you back the activity you just posted
 }
 ```
 
-## 3. Deleting a note
+## ۳. حذف یک یادداشت
 
-He decides he doesn't want to greet the world and deletes his post::
+تصمیم می‌گیرد که نمی‌خواهد به دنیا سلام کند و پستش را حذف می‌کند::
 ```
 POST /api/user/eric/feed HTTP/1.1
 Host: example.se
@@ -129,10 +129,10 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-A shell of the note remains which is referenced in previous activities that
-have previously referenced this object. The server will also be required to
-return a HTTP 410 GONE status when the ID is dereferenced. The shell looks
-looks like::
+پوسته‌ای از یادداشت باقی می‌ماند که در فعالیت‌های پیشینی که قبلاً به این شیء
+ارجاع داده‌اند، به آن ارجاع داده می‌شود. سرور همچنین ملزم خواهد بود هنگام
+واکشی شناسه، وضعیت HTTP 410 GONE را بازگرداند. این پوسته
+چنین شکلی دارد::
 ```
 {
     "@id": "http://example.se/api/note/1",

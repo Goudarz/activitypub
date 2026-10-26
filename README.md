@@ -1,97 +1,99 @@
-# ActivityPub
+# اکتیویتی‌پاب (ActivityPub)
 
-[ActivityPub](https://www.w3.org/TR/activitypub/) is the decentralized social networking protocol.
+[اکتیویتی‌پاب](https://www.w3.org/TR/activitypub/) پروتکل شبکهٔ اجتماعی غیرمتمرکز است.
 
-It provides a client to server API for creating, updating and deleting content, mechanisms for building a social graph, as well as a federated server to server API for delivering notifications and subscribing to content.
+این پروتکل یک API از کلاینت به سرور برای ایجاد، به‌روزرسانی و حذف محتوا، سازوکارهایی برای ساختن گراف اجتماعی، و همچنین یک API فدرال از سرور به سرور برای تحویل اعلان‌ها و مشترک شدن در محتوا فراهم می‌کند.
 
-It is based on the [ActivityStreams 2.0](https://www.w3.org/TR/activitystreams-core/) (AS2) data format, which is a JSON-LD format for describing social activities. Because AS2 is extensible with new types of activities, objects, and properties, ActivityPub is also extensible. You can build many different kinds of social applications on top of ActivityPub.
+اکتیویتی‌پاب بر پایهٔ قالب داده‌ای [ActivityStreams 2.0](https://www.w3.org/TR/activitystreams-core/) (AS2) بنا شده است که یک قالب JSON-LD برای توصیف فعالیت‌های اجتماعی است. از آنجا که AS2 با انواع جدیدی از فعالیت‌ها، اشیاء و ویژگی‌ها قابل گسترش است، اکتیویتی‌پاب نیز گسترش‌پذیر است. می‌توانید انواع بسیار متفاوتی از برنامه‌های اجتماعی را بر پایهٔ اکتیویتی‌پاب بسازید.
 
-ActivityPub is maintained by the [Social Web Working Group](https://www.w3.org/groups/wg/social) of the [World Wide Web Consortium](https://www.w3.org/).
+نگهداری اکتیویتی‌پاب بر عهدهٔ [کارگروه وب اجتماعی](https://www.w3.org/groups/wg/social) (Social Web Working Group) در [کنسرسیوم وب جهان‌گستر](https://www.w3.org/) (W3C) است.
 
-See also the [ActivityPub publication history](https://www.w3.org/standards/history/activitypub/).
+همچنین [تاریخچهٔ انتشار اکتیویتی‌پاب](https://www.w3.org/standards/history/activitypub/) را ببینید.
 
-## Key info
+> **یادداشت مترجم:** این مخزن ترجمهٔ فارسی غیررسمی مشخصهٔ اکتیویتی‌پاب است که [گودرز جعفری](https://goudarzjafari.com) آن را ترجمه کرده است. تنها نسخهٔ معتبر و هنجاری، [نسخهٔ انگلیسی](https://w3c.github.io/activitypub/) آن است.
 
-- The [ActivityPub specification](https://www.w3.org/TR/activitypub/) is the official document that describes the protocol.
-- The [errata](https://www.w3.org/wiki/ActivityPub_errata) pages shows known errors in the specification.
-- The [Editor's Draft](https://w3c.github.io/activitypub/) incorporates the corrected errata directly into the specification text.
-- The [Social  Web WG](https://www.w3.org/groups/wg/social/) is the working group that maintains the specification. It meets regularly to discuss the specification and its implementations.
-- The [ActivityPub Primer](https://www.w3.org/wiki/ActivityPub/Primer) gives deeper explanations of topics described in the specification.
+## اطلاعات کلیدی
 
-## Additional documents
+- [مشخصهٔ اکتیویتی‌پاب](https://www.w3.org/TR/activitypub/) سند رسمی‌ای است که پروتکل را توصیف می‌کند.
+- صفحهٔ [اصلاحیه‌ها](https://www.w3.org/wiki/ActivityPub_errata) (errata) خطاهای شناخته‌شدهٔ مشخصه را نشان می‌دهد.
+- [پیش‌نویس ویراستار](https://w3c.github.io/activitypub/) (Editor's Draft) اصلاحیه‌های اعمال‌شده را مستقیماً در متن مشخصه گنجانده است.
+- [کارگروه وب اجتماعی](https://www.w3.org/groups/wg/social/) (Social Web WG) کارگروهی است که از مشخصه نگهداری می‌کند. این کارگروه به‌طور منظم برای بحث دربارهٔ مشخصه و پیاده‌سازی‌های آن تشکیل جلسه می‌دهد.
+- [راهنمای مقدماتی اکتیویتی‌پاب](https://www.w3.org/wiki/ActivityPub/Primer) (ActivityPub Primer) توضیحات عمیق‌تری دربارهٔ موضوعاتی که در مشخصه شرح داده شده‌اند ارائه می‌دهد.
 
-The [Social Web Incubator Community Group](https://www.w3.org/groups/cg/socialcg/) also maintains:
+## اسناد تکمیلی
 
-- The [ActivityPub WebFinger profile](https://swicg.github.io/activitypub-webfinger/) describes how to use WebFinger with ActivityPub.
-- The [ActivityPub HTTP Signature profile](https://swicg.github.io/activitypub-http-signature/) describes how to use HTTP Signature with ActivityPub.
-- The [ActivityPub Data Portability task force](https://swicg.github.io/activitypub-data-portability/) describes how to use ActivityPub for data portability.
+[گروه انجمنی پرورش وب اجتماعی](https://www.w3.org/groups/cg/socialcg/) (Social Web Incubator Community Group) همچنین این اسناد را نگهداری می‌کند:
 
-## Editors
+- [نیم‌رخ WebFinger اکتیویتی‌پاب](https://swicg.github.io/activitypub-webfinger/) شرح می‌دهد که چگونه از WebFinger با اکتیویتی‌پاب استفاده کنید.
+- [نیم‌رخ امضای HTTP اکتیویتی‌پاب](https://swicg.github.io/activitypub-http-signature/) شرح می‌دهد که چگونه از امضای HTTP (HTTP Signature) با اکتیویتی‌پاب استفاده کنید.
+- [کارگروه ویژهٔ انتقال‌پذیری داده در اکتیویتی‌پاب](https://swicg.github.io/activitypub-data-portability/) شرح می‌دهد که چگونه از اکتیویتی‌پاب برای انتقال‌پذیری داده (data portability) استفاده کنید.
 
-The currently active editors of the AP specification(s) are:
+## ویراستاران
+
+ویراستاران فعلی مشخصهٔ (مشخصه‌های) اکتیویتی‌پاب عبارت‌اند از:
 
 - [Evan Prodromou](https://github.com/evanp)
 
-## Contributions
+## مشارکت
 
-The main way to make contributions, ask questions, or report errors is to make a [GitHub issue](https://github.com/w3c/activitypub/issues). Because the specification is a published W3C Recommendation, it is *not* helpful to make pull requests to the repository.
+راه اصلی برای مشارکت، پرسیدن سؤال یا گزارش خطا، ایجاد یک [مسئلهٔ (issue) گیت‌هاب](https://github.com/w3c/activitypub/issues) است. از آنجا که این مشخصه یک توصیه‌نامهٔ منتشرشدهٔ W3C است، ارسال درخواست ادغام (pull request) به مخزن *کمکی نمی‌کند*.
 
-The AS2 vocabulary provides the basic data model for ActivityPub. Questions or issues about the AS2 vocabulary should be directed to the [AS2 repository](https://github.com/w3c/activitystreams). If you're not sure whether an issue should go there or here, feel free to add it here and it will be discussed and moved if necessary.
+واژگان AS2 مدل دادهٔ پایهٔ اکتیویتی‌پاب را فراهم می‌کند. پرسش‌ها یا مسائل مربوط به واژگان AS2 باید به [مخزن AS2](https://github.com/w3c/activitystreams) ارجاع داده شوند. اگر مطمئن نیستید که یک مسئله باید آنجا مطرح شود یا اینجا، با خیال راحت آن را اینجا مطرح کنید؛ دربارهٔ آن بحث خواهد شد و در صورت لزوم منتقل می‌شود.
 
-## Processes
+## فرایندها
 
-Because the document is a published W3C Recommendation, the process for making changes to the specification is more formal than for other documents.
+از آنجا که این سند یک توصیه‌نامهٔ منتشرشدهٔ W3C است، فرایند ایجاد تغییر در مشخصه رسمی‌تر از اسناد دیگر است.
 
-### Clarifying practices
+### روشن‌سازی شیوه‌ها
 
-Explanations, tips and clarifications usually go in the [ActivityPub Primer](https://www.w3.org/wiki/ActivityPub/Primer). If you have a question about how something works in ActivityPub, open an issue and we can discuss adding it to the primer.
+توضیحات، نکته‌ها و روشن‌سازی‌ها معمولاً در [راهنمای مقدماتی اکتیویتی‌پاب](https://www.w3.org/wiki/ActivityPub/Primer) قرار می‌گیرند. اگر دربارهٔ چگونگی کارکرد چیزی در اکتیویتی‌پاب پرسشی دارید، یک مسئله (issue) باز کنید تا دربارهٔ افزودن آن به راهنمای مقدماتی بحث کنیم.
 
-### Correcting errors
+### اصلاح خطاها
 
-To handle editorial errors like spelling or grammar mistakes, unclear or ambiguous text, factual errors in text, or syntax errors in examples, we have several steps.
+برای رسیدگی به خطاهای ویرایشی، مانند غلط‌های املایی یا دستوری، متن نامشخص یا مبهم، خطاهای واقعی در متن، یا خطاهای نحوی در نمونه‌ها، چند گام داریم:
 
-1. Make a GitHub issue.
-2. The editor will make a [proposed erratum](https://www.w3.org/wiki/ActivityPub_errata/Proposed) for review by the Social Web Working Group.
-3. At a future Social Web WG meeting, the group will review the proposed erratum and decide whether to accept it. Accepted errata are added to the [errata](https://www.w3.org/wiki/ActivityPub_errata) page.
-4. The editor will incorporate the errata into the [Editor's Draft](https://w3c.github.io/activitypub/).
-5. Errata are periodically deployed to the main [ActivityPub specification](https://www.w3.org/TR/activitypub/).
+1. یک مسئلهٔ گیت‌هاب ایجاد کنید.
+2. ویراستار یک [اصلاحیهٔ پیشنهادی](https://www.w3.org/wiki/ActivityPub_errata/Proposed) برای بررسی توسط کارگروه وب اجتماعی تهیه می‌کند.
+3. در یکی از جلسات آیندهٔ کارگروه وب اجتماعی، گروه اصلاحیهٔ پیشنهادی را بررسی می‌کند و دربارهٔ پذیرش آن تصمیم می‌گیرد. اصلاحیه‌های پذیرفته‌شده به صفحهٔ [اصلاحیه‌ها](https://www.w3.org/wiki/ActivityPub_errata) افزوده می‌شوند.
+4. ویراستار اصلاحیه‌ها را در [پیش‌نویس ویراستار](https://w3c.github.io/activitypub/) می‌گنجاند.
+5. اصلاحیه‌ها به‌طور دوره‌ای در [مشخصهٔ اصلی اکتیویتی‌پاب](https://www.w3.org/TR/activitypub/) اعمال می‌شوند.
 
-### Backwards-compatible changes
+### تغییرات سازگار با نسخه‌های پیشین
 
-Backwards-compatible changes to ActivityPub include the following:
+تغییرات سازگار با نسخه‌های پیشین (backwards-compatible) در اکتیویتی‌پاب شامل موارد زیر است:
 
-- Adding new kinds of activities
-- Adding new kinds of objects
-- Making mandatory behaviours optional
-- Adding new properties to existing types
+- افزودن انواع جدید فعالیت
+- افزودن انواع جدید شیء
+- اختیاری کردن رفتارهای الزامی
+- افزودن ویژگی‌های جدید به انواع موجود
 
-Backwards-compatible changes should usually be implemented as extensions to the specification. The [Activity Streams 2.0 primer](https://www.w3.org/wiki/Activity_Streams/Primer/Extensions) describes the extension architecture for ActivityStreams 2.0. The [Extensions Policy](https://swicg.github.io/extensions-policy/) describes the process for incorporating popular extensions into the main Activity Streams 2.0 context document.
+تغییرات سازگار با نسخه‌های پیشین معمولاً باید به‌صورت افزونه‌هایی بر مشخصه پیاده‌سازی شوند. [راهنمای مقدماتی Activity Streams 2.0](https://www.w3.org/wiki/Activity_Streams/Primer/Extensions) معماری افزونه‌ها را در ActivityStreams 2.0 شرح می‌دهد. [سیاست افزونه‌ها](https://swicg.github.io/extensions-policy/) (Extensions Policy) فرایند گنجاندن افزونه‌های پرطرفدار در سند بافتار (context) اصلی Activity Streams 2.0 را شرح می‌دهد.
 
-The [Fediverse Enhancement Proposals](https://codeberg.org/fediverse/fep) process is a lightweight collaboration process for creating and documenting Activity Streams 2.0 extensions (and other changes to the Fediverse). It's a good place to start if you're considering a backwards-compatible change.
+فرایند [پیشنهادهای بهبود فدیورس](https://codeberg.org/fediverse/fep) (Fediverse Enhancement Proposals یا FEP) یک فرایند همکاری سبک برای ایجاد و مستندسازی افزونه‌های Activity Streams 2.0 (و دیگر تغییرات فدیورس) است. اگر به فکر یک تغییر سازگار با نسخه‌های پیشین هستید، نقطهٔ شروع خوبی است.
 
-There are many ideas for backwards-compatible changes to ActivityPub that have not yet been written up as a FEP or other document. These are marked [Needs FEP](https://github.com/w3c/activitypub/issues?q=is%3Aissue+label%3A%22Needs+FEP%22) in the ActivityPub GitHub issue repository, and contributors are welcome to [submit a FEP](https://codeberg.org/fediverse/fep/src/branch/main#submitting-a-fep) on the topic. Note that issues may be closed without the FEP being created; that does not mean that the FEP is no longer needed.
+ایده‌های بسیاری برای تغییرات سازگار با نسخه‌های پیشین در اکتیویتی‌پاب وجود دارد که هنوز به‌صورت FEP یا سند دیگری نوشته نشده‌اند. این موارد در مخزن مسائل گیت‌هاب اکتیویتی‌پاب با برچسب [Needs FEP](https://github.com/w3c/activitypub/issues?q=is%3Aissue+label%3A%22Needs+FEP%22) علامت خورده‌اند و از مشارکت‌کنندگان دعوت می‌شود دربارهٔ آن موضوع [یک FEP ارسال کنند](https://codeberg.org/fediverse/fep/src/branch/main#submitting-a-fep). توجه داشته باشید که ممکن است مسائل بدون ایجاد FEP بسته شوند؛ این بدان معنا نیست که دیگر نیازی به آن FEP نیست.
 
-Some backwards-compatible changes cannot be implemented as extensions. They require a new version of the core document; see below for how that process works. Examples include:
+برخی تغییرات سازگار با نسخه‌های پیشین را نمی‌توان به‌صورت افزونه پیاده‌سازی کرد. این تغییرات به نسخهٔ جدیدی از سند هسته نیاز دارند؛ برای چگونگی این فرایند، ادامه را ببینید. نمونه‌ها عبارت‌اند از:
 
-- Loosening behavioural requirements
-- Deprecating existing properties or behaviours
+- سهل‌تر کردن الزامات رفتاری
+- منسوخ کردن (deprecate) ویژگی‌ها یا رفتارهای موجود
 
-### Breaking changes
+### تغییرات ناسازگار
 
-Breaking changes to the specification require chartering a new working group at the W3C. It also requires making changes in dozens of ActivityPub implementations and tens of thousands of running servers. Breaking changes also cause disruption on the working network, since implementations and servers will upgrade gradually, on their own pace, not all at once. This is a lot of work, inhibits the point of the protocol (connecting people and communities), and is not done lightly.
+تغییرات ناسازگار (breaking changes) در مشخصه، مستلزم تشکیل یک کارگروه جدید با منشور تازه در W3C است. همچنین مستلزم ایجاد تغییر در ده‌ها پیاده‌سازی اکتیویتی‌پاب و ده‌ها هزار سرور در حال اجراست. تغییرات ناسازگار همچنین در شبکهٔ فعال اختلال ایجاد می‌کنند، چرا که پیاده‌سازی‌ها و سرورها به‌تدریج و با سرعت خودشان ارتقا می‌یابند، نه همه با هم. این کار بسیار زیادی است، هدف پروتکل (پیوند دادن افراد و جوامع) را مختل می‌کند و به‌سادگی انجام نمی‌شود.
 
-Examples of such changes:
+نمونه‌هایی از چنین تغییراتی:
 
-- Making optional features mandatory
-- Forbidding optional features
-- Forbidding required features
+- الزامی کردن قابلیت‌های اختیاری
+- ممنوع کردن قابلیت‌های اختیاری
+- ممنوع کردن قابلیت‌های الزامی
 
-To propose a breaking change to ActivityPub, add a new issue. It will be discussed and flagged for the next version of ActivityPub.
+برای پیشنهاد یک تغییر ناسازگار در اکتیویتی‌پاب، یک مسئلهٔ جدید ایجاد کنید. دربارهٔ آن بحث خواهد شد و برای نسخهٔ بعدی اکتیویتی‌پاب علامت‌گذاری می‌شود.
 
-## Lists of implementations
+## فهرست‌های پیاده‌سازی‌ها
 
-These lists are externally maintained and initiated.
+این فهرست‌ها به‌صورت بیرونی ایجاد و نگهداری می‌شوند.
 
-- [delightful activitypub development](https://delightful.club/delightful_activitypub_development/): developer tools
-- [delightful fediverse apps](https://delightful.club/delightful_fediverse_apps/): ActivityPub federation protocol implementations
-- [FediDB software](https://fedidb.org/software): periodically polled software census, with statistics per implementation
+- [delightful activitypub development](https://delightful.club/delightful_activitypub_development/): ابزارهای توسعه‌دهندگان
+- [delightful fediverse apps](https://delightful.club/delightful_fediverse_apps/): پیاده‌سازی‌های پروتکل فدراسیون اکتیویتی‌پاب
+- [FediDB software](https://fedidb.org/software): سرشماری نرم‌افزارها که به‌طور دوره‌ای به‌روز می‌شود، همراه با آمار هر پیاده‌سازی

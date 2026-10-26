@@ -1,39 +1,38 @@
-# Following a person
+# دنبال کردن یک شخص
 
-From https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Following_a_person
+برگرفته از https://www.w3.org/wiki/Socialwg/Social_API/User_stories#Following_a_person
 
-> 1. Delano meets Beth at a company meeting. They are both user interface designers. He finds her ideas interesting.
-> 2. Delano follows Beth on their company social network.
-> 3. Beth posts a photo from a whiteboarding session at a company retreat.
-> 4. Delano sees the photo in his inbox stream.
-> 5. Ted, Delano's coworker, wants to find new people to follow. He looks at the list of people that Delano follows. He finds Beth in the list, reads her stream, enjoys it, and decides to follow her, too.
-> 6. Beth posts frequently. Delano is having a hard time reading his inbox stream because Beth's activities drown out everyone else's. He stops following Beth.
+> 1. دلانو (Delano) در یک جلسهٔ شرکت با بث (Beth) آشنا می‌شود. هر دو طراح رابط کاربری هستند. دلانو ایده‌های بث را جالب می‌یابد.
+> 2. دلانو بث را در شبکهٔ اجتماعی شرکتشان دنبال می‌کند.
+> 3. بث عکسی از یک جلسهٔ کار روی تخته‌سفید در اردوی کاری شرکت منتشر می‌کند.
+> 4. دلانو عکس را در جریان صندوق ورودی‌اش می‌بیند.
+> 5. تد (Ted)، همکار دلانو، می‌خواهد افراد جدیدی برای دنبال کردن پیدا کند. او به فهرست کسانی که دلانو دنبال می‌کند نگاه می‌کند. بث را در فهرست پیدا می‌کند، جریان او را می‌خواند، از آن لذت می‌برد و تصمیم می‌گیرد او را هم دنبال کند.
+> 6. بث زیاد پست می‌گذارد. دلانو در خواندن جریان صندوق ورودی‌اش مشکل دارد، چون فعالیت‌های بث فعالیت‌های بقیه را تحت‌الشعاع قرار می‌دهد. او دنبال کردن بث را متوقف می‌کند.
 
-## 1, 2: Meeting and following a new person
+## ۱ و ۲: آشنایی با یک شخص جدید و دنبال کردن او
 
-At the Acme Game Corp company all-hands, Delano and Beth discover they
-have a shared interest in user interface history and both have a soft
-spot for retro toolkits like Motif.  It's not every day you meet
-someone else to chat about vintage GUI elements, so Delano asks if
-they can chat further.  Beth hands Delano her business card and
-suggests maybe they could collaborate on an upcoming project.
+در جلسهٔ عمومی شرکت Acme Game Corp، دلانو و بث متوجه می‌شوند که
+هر دو به تاریخچهٔ رابط کاربری علاقه دارند و هر دو دلبستگی خاصی به
+جعبه‌ابزارهای قدیمی مانند Motif دارند.  هر روز پیش نمی‌آید که کسی را
+ببینید که بتوانید با او دربارهٔ اجزای قدیمی رابط گرافیکی گپ بزنید، پس دلانو می‌پرسد که
+آیا می‌توانند بیشتر صحبت کنند.  بث کارت ویزیتش را به دلانو می‌دهد و
+پیشنهاد می‌کند که شاید بتوانند در پروژهٔ آینده‌ای با هم همکاری کنند.
 
-Delano sees that her name is "Beth Marie Bost" and enters her name
-into the company people-finder.  He ends up at the following URL, her
-internal profile:
+دلانو می‌بیند که نام او «Beth Marie Bost» است و نامش را
+در جست‌وجوگر افراد شرکت وارد می‌کند.  در نهایت به نشانی زیر می‌رسد که
+نیم‌رخ داخلی بث است:
 
   https://acmegamecorp.example/people/beth_m_bost/
 
-That's her all right!  He decides to subscribe to her using his
-desktop client.  He hits the "subscribe" button and pastes her profile
-URL into the textbox.
+خودش است!  تصمیم می‌گیرد با کلاینت رومیزی‌اش مشترک او شود.
+دکمهٔ «اشتراک» (subscribe) را می‌زند و نشانی نیم‌رخ بث را
+در کادر متنی می‌چسباند.
 
-Delano's client submits a post to its outbox declaring that Delano
-would like to subscribe to Beth.  Beth is included as a recipient in
-the "to" field so that her server can know to begin delivery of
-messages to Delano, and the special
-[public collection](http://w3c.github.io/activitypub/#public-addressing)
-is added as a Cc: so that others might know about that subscription.
+کلاینت دلانو پستی به صندوق خروجی‌اش ارسال می‌کند و اعلام می‌کند که دلانو
+می‌خواهد مشترک بث شود.  بث به‌عنوان گیرنده در فیلد «to» آمده است
+تا سرورش بداند که باید تحویل پیام‌ها به دلانو را آغاز کند، و
+[مجموعهٔ عمومی](http://w3c.github.io/activitypub/#public-addressing)
+ویژه نیز به‌عنوان Cc: افزوده شده است تا دیگران از این اشتراک باخبر شوند.
 
 
 ```
@@ -66,9 +65,9 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-Behind the scenes, Delano's server fetches Beth's profile URL and sees
-a Json-LD encoded ActivityStreams representation of a Person on the
-page:
+در پشت صحنه، سرور دلانو نشانی نیم‌رخ بث را واکشی می‌کند و
+بازنمایی ActivityStreams یک Person را که با Json-LD کدگذاری شده است
+در صفحه می‌بیند:
 
 ```
 GET /people/beth_m_bost/
@@ -105,9 +104,9 @@ Content-Type: text/html
 </html>
 ```
 
-The server takes note of Beth's "inbox"; it needs this information so
-that it can send this activity to Beth.  Now that it has it, it posts
-the same activity that Delano posted to his outbox to Beth's inbox.
+سرور «inbox» بث را یادداشت می‌کند؛ این اطلاعات را لازم دارد تا
+بتواند این فعالیت را برای بث بفرستد.  اکنون که آن را دارد،
+همان فعالیتی را که دلانو به صندوق خروجی‌اش ارسال کرده بود، به صندوق ورودی بث ارسال می‌کند.
 
 ```
 POST /api/user/beth_m_bost/inbox HTTP/1.1
@@ -119,25 +118,28 @@ Authorization: Bearer xx-bearer-token-here-xx
    [... YES I KNOW JSON DOESN'T HAVE COMMENTS WHAT'S UP WITH THAT] */
 ```
 
-Beth's server recognizes that Delano is subscribing to Beth and
-records that information so that future activities addressed generally
-to Beth's followers will reach Delano.  Beth will also get a
-notification in her inbox seeing that Delano has subscribed to her,
-which she can use to follow back.
+(توضیح نمونه: بدنهٔ درخواست همان سندی است که پیش‌تر ارسال شد؛ و بله،
+می‌دانیم که JSON توضیح (comment) ندارد!)
 
-Since this is a public post, Delano's server will also send this
-message to all of Delano's followers.
+سرور بث تشخیص می‌دهد که دلانو در حال مشترک شدن در بث است و
+این اطلاعات را ثبت می‌کند تا فعالیت‌های آینده‌ای که به‌طور کلی خطاب به
+دنبال‌کنندگان بث هستند به دلانو برسند.  بث نیز اعلانی در صندوق ورودی‌اش
+دریافت می‌کند که نشان می‌دهد دلانو مشترک او شده است، و می‌تواند از آن
+برای دنبال کردن متقابل استفاده کند.
 
-## 3, 4: Seeing that new person's content
+از آنجا که این یک پست عمومی است، سرور دلانو این
+پیام را برای همهٔ دنبال‌کنندگان دلانو نیز می‌فرستد.
 
-Beth has settled back from the company retreat and decides to post a
-picture from a whiteboarding session she participated in.  Her client submits
-to the file endpoint for her user
-(note: where the file endpoint is defined still
-[needs to be clarified](https://github.com/w3c-social/activitypub/issues/23))
-and gets back a response object with the object.  The client then
-makes a second post containing addressing of who the file should be
-sent to.
+## ۳ و ۴: دیدن محتوای شخص جدید
+
+بث از اردوی کاری شرکت برگشته و جاافتاده است و تصمیم می‌گیرد
+عکسی از یک جلسهٔ کار روی تخته‌سفید که در آن شرکت داشت منتشر کند.  کلاینت او
+عکس را به نقطهٔ پایانی فایلِ کاربرش ارسال می‌کند
+(یادداشت: این‌که نقطهٔ پایانی فایل کجا تعریف می‌شود هنوز
+[باید روشن شود](https://github.com/w3c-social/activitypub/issues/23))
+و یک شیء پاسخ حاوی شیء دریافت می‌کند.  سپس کلاینت
+ارسال دومی انجام می‌دهد که نشانی‌دهیِ کسانی را که فایل باید برایشان
+فرستاده شود در بر دارد.
 
 ```
 POST /api/user/beth_m_bost/feed HTTP/1.1
@@ -173,8 +175,8 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-When Delano next looks at his inbox, he sees this object, amongst
-others:
+دفعهٔ بعد که دلانو به صندوق ورودی‌اش نگاه می‌کند، این شیء را در میان
+موارد دیگر می‌بیند:
 
 ```
 GET /api/user/delano_sota/inbox HTTP/1.1
@@ -222,30 +224,29 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-## 5: Friends finding and following friends
+## ۵: دوستانی که دوستان را پیدا می‌کنند و دنبال می‌کنند
 
-Ted looks at his sad and fairly quiet timeline and thinks he should
-follow someone interesting.  He sees that Delano has recently
-favorited and shared with his followers several posts that Beth has
-made.  He clicks on Beth's name in his client's interface and selects
-"Subscribe".  Behind the scenes, the same process that happened with
-Delano subscribing to Beth happens again, but instead with Ted
-subscribing to Beth.
+تد به خط زمانی غم‌انگیز و نسبتاً ساکت خود نگاه می‌کند و به این فکر می‌افتد که باید
+کسی جالب را دنبال کند.  می‌بیند که دلانو اخیراً چند پستِ بث را
+پسندیده و با دنبال‌کنندگانش به اشتراک گذاشته است.  او در رابط کلاینتش
+روی نام بث کلیک می‌کند و «اشتراک» را انتخاب می‌کند.  در پشت صحنه،
+همان فرایندی که هنگام مشترک شدن دلانو در بث رخ داد دوباره
+رخ می‌دهد، اما این بار تد در بث مشترک می‌شود.
 
-(I believe the above example is self explanatory enough to not repeat
-those requests.)
+(به گمانم نمونهٔ بالا به اندازهٔ کافی گویاست و نیازی به تکرار
+آن درخواست‌ها نیست.)
 
 
-## 6: Unfollowing someone
+## ۶: لغو دنبال کردن کسی
 
-Delano is in the middle of an urgent project and needs to pay close
-attention to messages from his immediate team-mates, but he is feeling
-overwhelmed with Beth's frequent posting, which is making it hard for
-him to sort through his inbox.  He decides to unsubscribe, at least
-for now.  He clicks on Beth's username and selects "Unsubscribe".
+دلانو درگیر یک پروژهٔ فوری است و باید با دقت به پیام‌های
+هم‌تیمی‌های نزدیکش توجه کند، اما از پست‌های پرشمار بث احساس
+سردرگمی می‌کند و همین کار مرتب کردن صندوق ورودی را برایش دشوار
+کرده است.  تصمیم می‌گیرد اشتراکش را لغو کند، دست‌کم
+فعلاً.  روی نام کاربری بث کلیک می‌کند و «لغو اشتراک» را انتخاب می‌کند.
 
-His client submits an activity with an "Unfollow" activity to his
-outbox:
+کلاینت او فعالیتی از نوع «Unfollow» را به صندوق خروجی‌اش
+ارسال می‌کند:
 
 ```
 POST /api/user/delano_sota/feed HTTP/1.1
@@ -277,9 +278,9 @@ Authorization: Bearer xx-bearer-token-here-xx
 }
 ```
 
-Delano's server sends the above activity to Beth's inbox as well as
-the inboxes of his general followers.  Delano's server removes Beth
-from his "following" collection and Beth's server removes Delano from
-Beth's "followers" collection.  In the future, Beth's server will not
-send activities to Delano which are addressed to her general
-followers.
+سرور دلانو فعالیت بالا را به صندوق ورودی بث و همچنین
+صندوق‌های ورودی دنبال‌کنندگان عمومی‌اش می‌فرستد.  سرور دلانو بث را
+از مجموعهٔ «following» او حذف می‌کند و سرور بث دلانو را از
+مجموعهٔ «followers» بث حذف می‌کند.  از این پس، سرور بث
+فعالیت‌هایی را که خطاب به دنبال‌کنندگان عمومی او هستند، برای دلانو
+نخواهد فرستاد.

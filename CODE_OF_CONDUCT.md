@@ -1,3 +1,3 @@
-# Code of Conduct
+# منشور رفتاری
 
-All documentation, code and communication under this repository are covered by the [W3C Code of Conduct](https://www.w3.org/policies/code-of-conduct/).
+همهٔ مستندات، کدها و ارتباطات در این مخزن مشمول [منشور رفتاری W3C](https://www.w3.org/policies/code-of-conduct/) هستند.

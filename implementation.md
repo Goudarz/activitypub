@@ -1,110 +1,108 @@
-ActivityPub
+اکتیویتی‌پاب (ActivityPub)
 ============
 
-Implementation overview
+نمای کلی پیاده‌سازی
 -----------------------
 
-1.  Post to outbox, expose outbox (client to server, "Social API")
-2.  Discover inboxes of and post to anyone explicitly targeted (server
-    to server, "Federation API")
-3.  Have a discoverable inbox that people can post to *(Issue: What's the AP/pump
-    approach to spam?)* (server to server, "Federation API")
-4.  Side effects: update data on the server in response to certain
-    activities (posted to your outbox by you or inbox by others).
-5.  Access control: allow authentication (by clients and/or servers?) to
-    retrieve certain posts
+1.  ارسال (POST) به صندوق خروجی و در دسترس قرار دادن صندوق خروجی (کلاینت به سرور، «API اجتماعی»)
+2.  کشف صندوق‌های ورودی هر کسی که صراحتاً هدف قرار گرفته و ارسال به آن‌ها (سرور
+    به سرور، «API فدراسیون»)
+3.  داشتن یک صندوق ورودی قابل کشف که دیگران بتوانند به آن ارسال کنند *(مسئله: رویکرد
+    AP/pump در برابر هرزنامه چیست؟)* (سرور به سرور، «API فدراسیون»)
+4.  اثرات جانبی: به‌روزرسانی داده‌ها روی سرور در پاسخ به برخی
+    فعالیت‌ها (که خودتان به صندوق خروجی یا دیگران به صندوق ورودی‌تان ارسال کرده‌اند).
+5.  کنترل دسترسی: امکان احراز هویت (توسط کلاینت‌ها و/یا سرورها؟) برای
+    بازیابی برخی پست‌ها
 
-### Note: Comparison with indieweb
+### یادداشت: مقایسه با ایندی‌وب (IndieWeb)
 
-1.  Micropub endpoint + h-feed
-2.  Discover webmention endpoint and send webmentions
-3.  Have a discoverable webmention endpoint that people can post
-    webmentions to (for spam see [vouch](http://indiewebcamp.com/vouch)
-4.  Side effects: *no spec'd indieweb equivalent*
-5.  Access control: allow people to sign into your site with RelMeAuth. Access control for clients/servers discussed but not spec'd.
+1.  نقطهٔ پایانی Micropub + h-feed
+2.  کشف نقطهٔ پایانی webmention و ارسال webmentionها
+3.  داشتن یک نقطهٔ پایانی webmention قابل کشف که دیگران بتوانند
+    webmentionها را به آن ارسال کنند (برای هرزنامه، [vouch](http://indiewebcamp.com/vouch) را ببینید)
+4.  اثرات جانبی: *هیچ معادل مشخص‌شده‌ای در ایندی‌وب وجود ندارد*
+5.  کنترل دسترسی: امکان ورود افراد به سایت شما با RelMeAuth. کنترل دسترسی برای کلاینت‌ها/سرورها مطرح شده اما مشخص نشده است.
 
-Implementation breakdown
+جزئیات پیاده‌سازی
 ------------------------
 
-### 1. Outbox
+### ۱. صندوق خروجی
 
-1.  Your outbox endpoint is discoverable from your homepage or profile.
-2.  Your outbox endpoint receives authenticated HTTP POST requests
-    containing an ActivityStreams activity (or content-object?) with
-    Content-Type of `application/activity+json`.
-3.  If other objects are mentioned (eg. in `object`, `target` or
-    `inReplyTo`) the new activity (or content-object?) is posted to the
-    mentioned object(s)'s actor's inbox endpoint (or to the mentioned
-    object directly?)
-4.  Your outbox endpoint responds to HTTP GET requests with all
-    activities as JSON in reverse-chronological order.
-5.  GET requests to individual object URIs should return the object
-    properties as JSON.
+1.  نقطهٔ پایانی صندوق خروجی شما از صفحهٔ اصلی یا نیم‌رخ شما قابل کشف است.
+2.  نقطهٔ پایانی صندوق خروجی شما درخواست‌های HTTP POST احراز هویت‌شده‌ای را دریافت می‌کند
+    که حاوی یک فعالیت ActivityStreams (یا شیء محتوایی؟) با
+    Content-Type برابر با `application/activity+json` هستند.
+3.  اگر اشیاء دیگری ذکر شده باشند (مثلاً در `object`، `target` یا
+    `inReplyTo`)، فعالیت جدید (یا شیء محتوایی؟) به نقطهٔ پایانی صندوق ورودیِ
+    کنشگرِ آن شیء یا اشیاء ذکرشده ارسال می‌شود (یا مستقیماً به خود
+    شیء ذکرشده؟)
+4.  نقطهٔ پایانی صندوق خروجی شما به درخواست‌های HTTP GET با همهٔ
+    فعالیت‌ها به‌صورت JSON و به ترتیب زمانی معکوس پاسخ می‌دهد.
+5.  درخواست‌های GET به URIهای تک‌تک اشیاء بهتر است ویژگی‌های شیء را
+    به‌صورت JSON بازگردانند.
 
-### 2. Discover and post to inboxes
+### ۲. کشف صندوق‌های ورودی و ارسال به آن‌ها
 
-1.  When your outbox receives an activity (or content-object?) with an
-    audience specified in `cc` or `bcc` properties, your server
-    dereferences these URLs (continuing until URIs for users (Actors)
-    are found in the case of groups/collections) and discovers their
-    inbox endpoints.
-2.  Your server posts the (single) activity (or content-object?) to all
-    discovered inbox endpoints, with your authentication, and with
-    Content-Type `application/activity+json`.
+1.  وقتی صندوق خروجی شما فعالیتی (یا شیء محتوایی؟) با
+    مخاطبانی که در ویژگی‌های `cc` یا `bcc` مشخص شده‌اند دریافت می‌کند، سرور شما
+    این URLها را واکشی می‌کند (و در مورد گروه‌ها/مجموعه‌ها تا یافتن URIهای کاربران (کنشگرها)
+    ادامه می‌دهد) و نقطه‌های پایانی صندوق ورودی آن‌ها را کشف می‌کند.
+2.  سرور شما فعالیت (واحد) (یا شیء محتوایی؟) را به همهٔ
+    نقطه‌های پایانی صندوق ورودی کشف‌شده، با احراز هویت شما و با
+    Content-Type برابر با `application/activity+json` ارسال می‌کند.
 
-### 3. Inbox for receiving
+### ۳. صندوق ورودی برای دریافت
 
-1.  Your inbox endpoint is discoverable from your homepage or profile.
-2.  Your inbox endpoint receives HTTP POST requests containing an
-    ActivityStreams activity (or content-object?).
-3.  Your server dereferences the object URI and checks if the object is valid.
-4.  Your server checks to see if it has received this object before and
-    it hasn't changed, and discards if so.
-5.  Your server checks the authentication matches the `actor` of the
-    activity, and discards if not.
-6.  If a received object mentions one of your objects (eg. in `object`,
-    `target` or `inReplyTo`), your server posts the new object to all
-    recipients of your original object.
-7.  Your inbox endpoint responds to authenticated HTTP GET requests with
-    all activities as JSON in reverse-chronological order (usually
-    authentication would mean only the inbox owner can see the
-    contents).
+1.  نقطهٔ پایانی صندوق ورودی شما از صفحهٔ اصلی یا نیم‌رخ شما قابل کشف است.
+2.  نقطهٔ پایانی صندوق ورودی شما درخواست‌های HTTP POST حاوی یک
+    فعالیت ActivityStreams (یا شیء محتوایی؟) را دریافت می‌کند.
+3.  سرور شما URI شیء را واکشی می‌کند و بررسی می‌کند که شیء معتبر باشد.
+4.  سرور شما بررسی می‌کند که آیا این شیء را پیش‌تر دریافت کرده و
+    تغییری نکرده است یا نه، و در این صورت آن را کنار می‌گذارد.
+5.  سرور شما بررسی می‌کند که احراز هویت با `actor`
+    فعالیت مطابقت داشته باشد، و در غیر این صورت آن را کنار می‌گذارد.
+6.  اگر شیء دریافتی به یکی از اشیاء شما اشاره کند (مثلاً در `object`،
+    `target` یا `inReplyTo`)، سرور شما شیء جدید را برای همهٔ
+    گیرندگان شیء اصلی شما ارسال می‌کند.
+7.  نقطهٔ پایانی صندوق ورودی شما به درخواست‌های HTTP GET احراز هویت‌شده با
+    همهٔ فعالیت‌ها به‌صورت JSON و به ترتیب زمانی معکوس پاسخ می‌دهد (معمولاً
+    احراز هویت به این معناست که فقط مالک صندوق ورودی می‌تواند
+    محتوای آن را ببیند).
 
-### 4. Side effects
+### ۴. اثرات جانبی
 
-1.  When your outbox endpoint receives a `Create` activity, an object is
-    created.
-2.  When your outbox endpoint receives an `Update` activity, an existing
-    object is updated.
-3.  When your outbox endpoint receives a `Delete` activity, an existing
-    object is replaced with a tombstone, and requests to the object URI
-    return a 410.
-4.  When your outbox endpoint receives a `Follow` activity, your server
-    adds the object user to your 'follows' collection.
-5.  When your inbox endpoint receives a `Follow` activity with you as
-    the object, your server adds the actor to your 'followers'
-    collection (as such, they'll receive anything you post to your
-    followers).
-6.  When your outbox endpoint receives a `Like` activity, your server
-    adds the object to a collection of things you've liked.
-7.  When your inbox endpoint receives a `Like` activity, your server
-    adds the actor to a collection of actors who have liked the object.
-8.  When your outbox endpoint receives a `Add` activity, your server
-    adds the object to the collection in the `target`.
-9.  When your outbox endpoint receives a `Block` activity, your server
-    ignores any activities from the object user.
-10. When your outbox or inbox endpoint receives an `Undo` activity, your
-    server reverses any side-effects caused by the object activity.
+1.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Create` دریافت می‌کند، یک شیء
+    ایجاد می‌شود.
+2.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Update` دریافت می‌کند، یک شیء
+    موجود به‌روزرسانی می‌شود.
+3.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Delete` دریافت می‌کند، یک شیء
+    موجود با یک سنگ‌قبر (tombstone) جایگزین می‌شود و درخواست‌ها به URI شیء
+    کد 410 بازمی‌گردانند.
+4.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Follow` دریافت می‌کند، سرور شما
+    کاربرِ موضوع فعالیت (object) را به مجموعهٔ 'follows' شما می‌افزاید.
+5.  وقتی نقطهٔ پایانی صندوق ورودی شما یک فعالیت `Follow` دریافت می‌کند که شما
+    موضوع (object) آن هستید، سرور شما کنشگر را به مجموعهٔ 'followers'
+    شما می‌افزاید (در نتیجه، او هر چیزی را که برای
+    دنبال‌کنندگانتان منتشر کنید دریافت خواهد کرد).
+6.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Like` دریافت می‌کند، سرور شما
+    شیء را به مجموعه‌ای از چیزهایی که پسندیده‌اید می‌افزاید.
+7.  وقتی نقطهٔ پایانی صندوق ورودی شما یک فعالیت `Like` دریافت می‌کند، سرور شما
+    کنشگر را به مجموعه‌ای از کنشگرهایی که شیء را پسندیده‌اند می‌افزاید.
+8.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Add` دریافت می‌کند، سرور شما
+    شیء را به مجموعه‌ای که در `target` آمده است می‌افزاید.
+9.  وقتی نقطهٔ پایانی صندوق خروجی شما یک فعالیت `Block` دریافت می‌کند، سرور شما
+    همهٔ فعالیت‌های کاربرِ موضوع فعالیت (object) را نادیده می‌گیرد.
+10. وقتی نقطهٔ پایانی صندوق خروجی یا صندوق ورودی شما یک فعالیت `Undo` دریافت می‌کند،
+    سرور شما همهٔ اثرات جانبی‌ای را که فعالیتِ موضوع آن (object) ایجاد کرده بود برمی‌گرداند.
 
-### 5. Access control
+### ۵. کنترل دسترسی
 
-1.  When an authenticated GET request is made to your outbox, the
-    results are filtered according to the authenticated user's
-    permissions.
+1.  وقتی یک درخواست GET احراز هویت‌شده به صندوق خروجی شما فرستاده می‌شود،
+    نتایج بر اساس مجوزهای کاربرِ احراز هویت‌شده
+    پالایش می‌شوند.
 
-Todo...
+کارهای باقی‌مانده...
 -------
 
--   Binary data / file endpoint
--   Public addressing / special collections
-
+-   داده‌های دودویی / نقطهٔ پایانی فایل
+-   نشانی‌دهی عمومی / مجموعه‌های ویژه
