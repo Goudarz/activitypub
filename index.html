@@ -7,42 +7,23 @@
             async class="remove"></script>
     <script class="remove">
       var respecConfig = {
-          specStatus: "CG-FINAL",
-          publishDate: "2024-01-04",
-          previousPublishDate: "2018-01-23",
-          previousMaturity: "REC",
-          license: "w3c-software-doc",
+          specStatus: "ED",
           shortName:  "activitypub",
-          group: "socialcg",
-          wgURI: "https://www.w3.org/Social/WG",
+          group: "wg/social",
+          github: "w3c/activitypub",
           wgPublicList: "public-socialweb",
-          wgPatentURI: "https://www.w3.org/2004/01/pp-impl/72531/status",
           edDraftURI: "https://w3c.github.io/activitypub/",
-          testSuiteURI: "https://test.activitypub.rocks/",
           errata: "https://www.w3.org/wiki/ActivityPub_errata",
-          implementationReportURI: "https://activitypub.rocks/implementation-report",
-          otherLinks: [
+          editors: [
               {
-                  "key": "Repository",
-                  "data": [
-                      {
-                          "value": "Git repository",
-                          "href": "https://github.com/w3c/activitypub",
-                      },
-                      {
-                          "value": "Issues",
-                          "href": "https://github.com/w3c/activitypub/issues",
-                      },
-                      {
-                          "value": "Commits",
-                          "href": "https://github.com/w3c/activitypub/commits/gh-pages",
-                      }
-                  ]
+                  name:       "Evan Prodromou",
+                  url:        "https://socialwebfoundation.org/author/evanprodromou/",
+                  w3cid:      "43626"
               }
           ],
-          editors: [
+          formerEditors: [
                 {
-                    name:       "Christopher Lemmer Webber",
+                    name:       "Christine Lemmer-Webber",
                     url:        "https://dustycloud.org/",
                     w3cid:      "57007"
                 },
@@ -54,7 +35,7 @@
           ],
           authors: [
               {
-                  name: "Christopher Lemmer Webber",
+                  name: "Christine Lemmer-Webber",
                   url:  "https://dustycloud.org/"
               },
               {
@@ -71,47 +52,15 @@
               },
               {
                   name: "Evan Prodromou",
-                  url: "https://en.wikipedia.org/wiki/Evan_Prodromou"
+                  url: "https://socialwebfoundation.org/author/evanprodromou/"
               }
           ],
-          localBiblio:  {
-            "ActivityStreams": {
-              title:    "Activity Streams 2.0",
-              href:     "https://www.w3.org/TR/activitystreams-core/",
-              authors:  [
-                "J. Snell",
-              ],
-              status:   "Editors Draft",
-              publisher:  "ActivityStreams Working Group",
-            },
-            "Activity-Vocabulary": {
-              title:    "Activity Vocabulary",
-              href:     "https://www.w3.org/TR/activitystreams-vocabulary/",
-              authors:  [
-                "J. Snell",
-              ],
-              status:   "Editors Draft",
-              publisher:  "ActivityStreams Working Group",
-            },
-            "OAuth-Server-Metadata": {
-              title:    "OAuth 2.0 Authorization Server Metadata",
-              href:     "https://tools.ietf.org/html/draft-ietf-oauth-discovery-06",
-              authors:  [
-                "M. Jones",
-                "N. Sakimura",
-                "J. Bradley"
-              ],
-              status:   "Internet-Draft",
-              publisher:  "OAuth Working Group",
-            },
-        },
+          lint: {
+                "check-punctuation": true
+          },
+          doJsonLd: true
       };
     </script>
-    <style type="text/css">
-      img {
-          max-width: 100%;
-      }
-    </style>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
   </head>
   <!-- STYLISTIC NOTE: This document wraps on column 79 and at the end of every
@@ -120,7 +69,7 @@
     <section id="abstract">
       <p>
         The ActivityPub protocol is a decentralized social networking protocol
-        based upon the [[ActivityStreams]] 2.0 data format.
+        based upon the [[activitystreams-core]] 2.0 data format.
         It provides a client to server API for creating, updating and deleting
         content, as well as a federated server to server API for delivering
         notifications and content.
@@ -177,8 +126,8 @@
 
       <p>
         These are endpoints, or really, just URLs which are listed in the
-        ActivityPub actor's ActivityStreams description.
-        (More on ActivityStreams later).
+        ActivityPub actor's Activity Streams description.
+        (More on Activity Streams later).
       </p>
 
       <p>
@@ -200,16 +149,16 @@
       </pre>
 
       <p>
-        ActivityPub uses [[!ActivityStreams]] for its vocabulary.
-        This is pretty great because ActivityStreams includes all the common
+        ActivityPub uses [[!activitystreams-core]] for its vocabulary.
+        This is pretty great because Activity Streams includes all the common
         terms you need to represent all the activities and content flowing
         around a social network.
-        It's likely that ActivityStreams already includes all the vocabulary
-        you need, but even if it doesn't, ActivityStreams can be extended
+        It's likely that Activity Streams already includes all the vocabulary
+        you need, but even if it doesn't, Activity Streams can be extended
         via [[!JSON-LD]].
         If you know what JSON-LD is, you can take advantage of the cool linked
         data approaches provided by JSON-LD.
-        If you don't, don't worry, JSON-LD documents and ActivityStreams can be
+        If you don't, don't worry, JSON-LD documents and Activity Streams can be
         understood as plain old simple JSON.
         (If you're going to add extensions, that's the point at which JSON-LD
         really helps you out).
@@ -267,7 +216,7 @@
         Let's say Alyssa wants to catch up with her friend, Ben Bitdiddle.
         She lent him a book recently and she wants to make sure he returns it
         to her.
-        Here's the message she composes, as an ActivityStreams object:
+        Here's the message she composes, as an Activity Streams object:
       </p>
 
       <pre class="example highlight json">
@@ -313,7 +262,7 @@
       </pre>
 
       <p>
-        Alyssa's server looks up Ben's ActivityStreams actor object, finds his
+        Alyssa's server looks up Ben's Activity Streams actor object, finds his
         inbox endpoint, and POSTs her object to his inbox.
       </p>
 
@@ -471,17 +420,17 @@
     <section id="obj">
       <h2>Objects</h2>
       <p>
-        Objects are the core concept around which both [[!ActivityStreams]] and
+        Objects are the core concept around which both [[!activitystreams-core]] and
         ActivityPub are built.
         Objects are often wrapped in Activities and are contained in streams of
         Collections, which are themselves subclasses of Objects.
-        See the [[!Activity-Vocabulary]] document, particularly the
+        See the [[!activitystreams-vocabulary]] document, particularly the
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#types">Core Classes</a>;
         ActivityPub follows the mapping of this vocabulary very closely.
       </p>
       <p>
         ActivityPub defines some terms in addition to those provided by
-        ActivityStreams.
+        Activity Streams.
         These terms are provided in the ActivityPub
         <a href="http://www.w3.org/TR/json-ld/#the-context">JSON-LD context</a>
         at
@@ -493,7 +442,7 @@
       <p>
         ActivityPub shares the same
         <a href="https://www.w3.org/TR/activitystreams-core/#urls">
-          URI / IRI conventions as in ActivityStreams</a>.
+          URI / IRI conventions as in Activity Streams</a>.
       </p>
       <p>
         Servers SHOULD validate the content they receive to avoid content
@@ -531,33 +480,16 @@
       <section id="obj-id">
         <h2>Object Identifiers</h2>
         <p>
-          All Objects in [[!ActivityStreams]] should have unique global
+          All Objects in [[!activitystreams-core]] should have unique global
           identifiers.
-          ActivityPub extends this requirement; all objects distributed by the
-          ActivityPub protocol MUST have unique global identifiers, unless they
-          are intentionally transient (short lived activities that are not
-          intended to be able to be looked up, such as some kinds of chat
-          messages or game notifications).
-          These identifiers must fall into one of the following groups:
+          ActivityPub extends this requirement; all objects distributed by the ActivityPub protocol MUST have unique global identifiers, unless they are intentionally transient or anonymous, in which case the identifier MAY be omitted. If present, the identifiers MUST be publicly dereferencable URIs, such as HTTPS URIs, with their authority belonging to that of their originating server. (Publicly facing content SHOULD use HTTPS URIs).
         </p>
-        <ol>
-          <li>
-            Publicly dereferencable URIs, such as HTTPS URIs, with their
-            authority belonging to that of their originating server.
-            (Publicly facing content SHOULD use HTTPS URIs).
-          </li>
-          <li>
-            An ID explicitly specified as the JSON <code>null</code> object,
-            which implies an anonymous object (a part of its parent context)
-          </li>
-        </ol>
         <p>
           Identifiers MUST be provided for activities posted in server to
           server communication, unless the activity is intentionally transient.
           However, for client to server communication, a server receiving an
           object posted to the outbox with no specified <code>id</code> SHOULD
-          allocate an object ID in the actor's namespace and attach it to the
-          posted object.
+          allocate an object ID and attach it to the posted object.
         </p>
         <p>All objects have the following properties:</p>
         <dl>
@@ -576,24 +508,23 @@
       <section id="retrieving-objects">
         <h2>Retrieving objects</h2>
         <p>
-          The HTTP GET method may be dereferenced against an object's
-          <code>id</code> property to retrieve the activity.
+          The HTTP GET method may be used to dereference an object's <code>id</code> property to retrieve the object.
           Servers MAY use HTTP content negotiation as defined in [[!RFC7231]] to
           select the type of data to return in response to a request,
-          but MUST present the ActivityStreams object representation
+          but MUST present the Activity Streams object representation
           in response to
           <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>,
-          and SHOULD also present the ActivityStreams representation in
+          and SHOULD also present the Activity Streams representation in
           response to <code>application/activity+json</code> as well.
           The client MUST specify an <code>Accept</code> header with the
           <code>application/ld+json; profile="https://www.w3.org/ns/activitystreams"</code>
-          media type in order to retrieve the activity.
+          media type in order to retrieve the object.
         </p>
         <p>
           Servers MAY implement other behavior for requests which do not comply
           with the above requirement.
           (For example, servers may implement additional legacy protocols, or
-          may use the same URI for both HTML and ActivityStreams
+          may use the same URI for both HTML and Activity Streams
           representations of a resource).
         </p>
         <p>
@@ -613,7 +544,7 @@
         <h2>The source property</h2>
         <p>
           In addition to all the properties defined by the
-	  [[!Activity-Vocabulary]], ActivityPub extends the <code>Object</code> by
+	  [[!activitystreams-vocabulary]], ActivityPub extends the <code>Object</code> by
 	  supplying the <code>source</code> property.
           The <code>source</code> property is intended to convey some
           sort of source from which the <code>content</code> markup
@@ -682,14 +613,14 @@
       <p>
         ActivityPub actors are generally one of the
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#actor-types">
-          ActivityStreams Actor Types</a>,
+          Activity Streams Actor Types</a>,
         but they don't have to be. For example, a
         <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-profile">
           Profile</a> object
-        might be used as an actor, or a type from an ActivityStreams extension.
+        might be used as an actor, or a type from an Activity Streams extension.
         Actors are <a href="#retrieving-objects">retrieved</a> like any other
         Object in ActivityPub.
-        Like other ActivityStreams objects, actors have an <code>id</code>,
+        Like other Activity Streams objects, actors have an <code>id</code>,
         which is a URI.
         When entered directly into a user interface (for example on a login
         form), it is desirable to support simplified naming.
@@ -736,15 +667,14 @@
         <dl>
           <dt id="inbox-property">inbox</dt>
           <dd>
-            A reference to an [[!ActivityStreams]]
-            <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
+            An <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
               <code>OrderedCollection</code></a>
             comprised of all the messages received by the actor; see
             <a href="#inbox"></a>.
           </dd>
           <dt id="outbox-property">outbox</dt>
           <dd>
-            An [[!ActivityStreams]]
+            An [[!activitystreams-core]]
             <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
               <code>OrderedCollection</code></a>
             comprised of all the messages produced by the actor; see
@@ -758,12 +688,12 @@
         <dl>
           <dt id="following-property">following</dt>
           <dd>
-            A link to an [[!ActivityStreams]] collection of the actors that
-            this actor is following; see <a href="#following"></a>
+            A link to an [[!activitystreams-core]] collection of the actors that
+            this actor is following; see <a href="#following"></a>.
           </dd>
           <dt id="followers-property">followers</dt>
           <dd>
-            A link to an [[!ActivityStreams]] collection of the actors that
+            A link to an [[!activitystreams-core]] collection of the actors that
             follow this actor; see <a href="#followers"></a>.
           </dd>
         </dl>
@@ -773,7 +703,7 @@
         <dl>
           <dt id="liked-property">liked</dt>
           <dd>
-            A link to an [[!ActivityStreams]] collection of objects this
+            A link to an [[!activitystreams-core]] collection of objects this
             actor has liked; see <a href="#liked"></a>.
           </dd>
         </dl>
@@ -809,7 +739,7 @@
           </dd>
           <dt id="endpoints">endpoints</dt>
           <dd>
-            A json object which maps additional (typically server/domain-wide)
+            A JSON object which maps additional (typically server/domain-wide)
             endpoints which may be useful either for this actor or someone
             referencing this actor.
             This mapping may be nested inside the actor document as the value
@@ -825,11 +755,11 @@
           <dt id="proxyUrl">proxyUrl</dt>
           <dd>
             Endpoint URI so this actor's clients may access remote
-            ActivityStreams objects which require authentication to access.
+            Activity Streams objects which require authentication to access.
             To use this endpoint, the client posts an
             <code>x-www-form-urlencoded</code> <code>id</code> parameter
             with the value being the <code>id</code> of the requested
-            ActivityStreams object.
+            Activity Streams object.
           </dd>
           <dt id="oauthAuthorizationEndpoint">oauthAuthorizationEndpoint</dt>
           <dd>
@@ -863,7 +793,7 @@
             If Linked Data Signatures and HTTP Signatures are being used for
             authentication and authorization, this endpoint specifies a URI at
             which a client key may be signed by the actor's key for a time
-            window to act on behalf of the actor in interacting with foreign
+            window to act on behalf of the actor in interacting with remote
             servers.
           </dd>
           <dt id="sharedInbox">sharedInbox</dt>
@@ -885,8 +815,8 @@
         <div class="note" id="as2-actor-properties">
           <p>
             As the upstream vocabulary for ActivityPub, any applicable
-            [[!ActivityStreams]] property may be used on ActivityPub Actors.
-            Some ActivityStreams properties are particularly worth highlighting
+            [[!activitystreams-core]] property may be used on ActivityPub Actors.
+            Some Activity Streams properties are particularly worth highlighting
             to demonstrate how they are used in ActivityPub implementations.
           </p>
 
@@ -914,7 +844,7 @@
           such as <code>name</code> or
           <code>summary</code>, make use of
           <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
-            natural language support defined in ActivityStreams</a>.
+            natural language support defined in Activity Streams</a>.
         </p>
       </section>
 
@@ -923,11 +853,11 @@
     <section id="collections">
       <h2>Collections</h2>
       <p>
-        [[!ActivityStreams]] defines the collection concept; ActivityPub
+        [[!activitystreams-core]] defines the collection concept; ActivityPub
         defines several collections with special behavior.
         Note that ActivityPub makes use of
         <a href="https://www.w3.org/TR/activitystreams-core/#paging">
-          ActivityStreams paging</a>
+          Activity Streams paging</a>
         to traverse large sets of objects.
       </p>
 
@@ -967,7 +897,7 @@
         <h2>Outbox</h2>
         <p>
           The outbox is discovered through the <code>outbox</code>
-          property of an <a href="#actors">actor's</a> profile.
+          property of an <a href="#actors">actor</a> object.
           The <code>outbox</code> MUST be an
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
             <code>OrderedCollection</code></a>.
@@ -978,7 +908,7 @@
           activity (that is, the contents of the outbox are filtered by the
           permissions of the person reading it).
           If a user submits a request without
-          <a href="#authorization">Authorization</a> the server should
+          <a href="#authorization">Authorization</a> the server SHOULD
           respond with all of the <a href="#public-addressing">Public</a>
           posts.
           This could potentially be all relevant objects published by the
@@ -1038,12 +968,7 @@
         <h2>Followers Collection</h2>
         <p>
           Every <a href="#actors">actor</a> SHOULD have a <code>followers</code>
-          collection.
-          This is a list of everyone who has sent a
-          <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-follow">Follow</a>
-          activity for the actor, added as a
-          <a href="#follow-activity-outbox">side effect</a>.
-          This is where one would find a list of all the actors that are
+          collection. This is where one would find a list of all the actors that are
           following the actor.
           The <code>followers</code> collection MUST be either an
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection">
@@ -1099,7 +1024,7 @@
       <section id="public-addressing">
         <h2>Public Addressing</h2>
         <p>
-          In addition to [[!ActivityStreams]] collections and objects,
+          In addition to [[!activitystreams-core]] collections and objects,
           Activities may additionally be addressed to the special "public"
           collection, with the identifier
           <code>https://www.w3.org/ns/activitystreams#Public</code>.
@@ -1125,12 +1050,12 @@
         </p>
         <div class="note">
           <p>
-            Compacting an ActivityStreams object using the ActivityStreams
+            Compacting an Activity Streams object using the Activity Streams
             JSON-LD context might result in
             <code>https://www.w3.org/ns/activitystreams#Public</code>
             being represented as simply <code>Public</code> or <code>as:Public</code>
             which are valid representations of the Public collection.
-            Implementations which treat ActivityStreams objects as simply
+            Implementations which treat Activity Streams objects as simply
             JSON rather than converting an incoming activity over to a
             local context using JSON-LD tooling should be aware of this
             and should be prepared to accept all three representations.
@@ -1157,7 +1082,7 @@
 
         <div class="note">
           <p>
-            Care should be taken to not confuse the the
+            Care should be taken to not confuse the
             <a href="#likes"><code>likes</code></a>
             collection with the similarly named but different
             <a href="#liked"><code>liked</code></a> collection.
@@ -1168,7 +1093,7 @@
             <li>
               <b>liked:</b>
               Specifically a property of actors.
-              This is a collection of <code>Like</code> activities performed
+              This is a collection of objects liked
               <i>by the actor</i>,
               added to the collection as a
               <a href="#like-activity-outbox">
@@ -1210,7 +1135,7 @@
     <section id="client-to-server-interactions">
       <h2>Client to Server Interactions</h2>
       <p>
-        Activities as defined by [[!ActivityStreams]] are the core mechanism
+        Activities as defined by [[!activitystreams-core]] are the core mechanism
         for creating, modifying and sharing content within the social graph.
       </p>
 
@@ -1243,8 +1168,8 @@ Content-Type: application/ld+json; profile="https://www.w3.org/ns/activitystream
   "@context": ["https://www.w3.org/ns/activitystreams",
                {"@language": "en"}],
   "type": "Like",
-  "actor": "https://dustycloud.org/chris/",
-  "name": "Chris liked 'Minimal ActivityPub update client'",
+  "actor": "https://dustycloud.org/christine/",
+  "name": "Christine liked 'Minimal ActivityPub update client'",
   "object": "https://rhiaro.co.uk/2016/05/minimal-activitypub",
   "to": ["https://rhiaro.co.uk/#amy",
          "https://dustycloud.org/followers",
@@ -1268,7 +1193,7 @@ Location: https://dustycloud.org/likes/345
 
       <p id="remove-bto-bcc-before-delivery">
         The server MUST remove the <code>bto</code> and/or <code>bcc</code>
-        properties, if they exist, from the ActivityStreams object before
+        properties, if they exist, from the Activity Streams object before
         delivery, but MUST utilize the addressing originally stored
         on the <code>bto</code> / <code>bcc</code> properties for determining
         recipients in <a href="#delivery">delivery</a>.
@@ -1330,7 +1255,7 @@ Location: https://dustycloud.org/likes/345
           UI.
         </p>
         <p>
-          For example, when Chris likes the following article by Amy:
+          For example, when Christine likes the following article by Amy:
         </p>
 
         <pre class="example" title="An Article">
@@ -1340,7 +1265,7 @@ Location: https://dustycloud.org/likes/345
     "id": "https://rhiaro.co.uk/2016/05/minimal-activitypub",
     "type": "Article",
     "name": "Minimal ActivityPub update client",
-    "content": "Today I finished morph, a client for posting ActivityStreams2...",
+    "content": "Today I finished morph, a client for posting Activity Streams2...",
     "attributedTo": "<strong>https://rhiaro.co.uk/#amy</strong>",
     "to": "<strong>https://rhiaro.co.uk/followers/</strong>",
     "cc": "<strong>https://e14n.com/evan</strong>"
@@ -1354,8 +1279,8 @@ Location: https://dustycloud.org/likes/345
     "@context": ["https://www.w3.org/ns/activitystreams",
                  {"@language": "en"}],
     "type": "Like",
-    "actor": "https://dustycloud.org/chris/",
-    "summary": "Chris liked 'Minimal ActivityPub update client'",
+    "actor": "https://dustycloud.org/christine/",
+    "summary": "Christine liked 'Minimal ActivityPub update client'",
     "object": "https://rhiaro.co.uk/2016/05/minimal-activitypub",
     "to": ["<strong>https://rhiaro.co.uk/#amy</strong>",
            "https://dustycloud.org/followers",
@@ -1365,7 +1290,7 @@ Location: https://dustycloud.org/likes/345
         </pre>
 
         <p>The receiving outbox can then perform <a href="#delivery">delivery</a>
-        to not only the followers of Chris (the liker), but also to Amy, and Amy's
+        to not only the followers of Christine (the liker), but also to Amy, and Amy's
         followers and Evan, both of whom received the original article.</p>
 
         <p>
@@ -1411,7 +1336,7 @@ Location: https://dustycloud.org/likes/345
         <p>
           For client to server posting, it is possible to submit an object for
           creation without a surrounding activity.
-          The server MUST accept a valid [[!ActivityStreams]] object that
+          The server MUST accept a valid [[!activitystreams-core]] object that
           isn't a subtype of <code>Activity</code> in the POST request to the
           outbox.
           The server then MUST attach this object as the <code>object</code>
@@ -1489,9 +1414,6 @@ Location: https://dustycloud.org/likes/345
             the new value.
             This only applies to the top-level fields of the updated
             object.
-            A special exception is for when the value is the json
-            <code>null</code> type; this means that this field should be
-            removed from the server's representation of the object.
           </p>
           <p>
             Note that this behavior is for client to server interaction where
@@ -1754,7 +1676,7 @@ Location: https://dustycloud.org/likes/345
           inboxes and then posting the activity to those inboxes.
           Targets for delivery are determined by checking the
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#audienceTargeting">
-            ActivityStreams audience targeting</a>;
+            Activity Streams audience targeting</a>;
           namely, the <code>to</code>, <code>bto</code>, <code>cc</code>,
           <code>bcc</code>, and <code>audience</code> fields of the activity.
         </p>
@@ -1783,9 +1705,9 @@ Location: https://dustycloud.org/likes/345
           however it's recommended that if no recipients are specified the
           object remains completely private and access controls restrict the
           access to object.
-          If the object is just sent to the "public" collection the object is
-          not delivered to any actors but is publicly viewable in the actor's
-          outbox.
+          If the object is addressed exclusively to the "public" collection, the object
+          may be publicly viewable in the actor's outbox without being
+          delivered to any actors.
         </p>
 
         <p>
@@ -1821,7 +1743,7 @@ Location: https://dustycloud.org/likes/345
           ActivityPub and Linked Data Notifications, and the targeting
           and delivery systems described in this document are supported
           by Linked Data Notifications.
-          In addition to JSON-LD compacted ActivityStreams documents, Linked
+          In addition to JSON-LD compacted Activity Streams documents, Linked
           Data Notifications also supports a number of RDF serializations
           which are not required for ActivityPub implementations.
           However, ActivityPub implementations which wish to be more broadly
@@ -1848,7 +1770,9 @@ Location: https://dustycloud.org/likes/345
           </ul>
           <p>
             Servers MAY filter activities for privacy, abuse mitigation,
-            or other reasons.
+            or other reasons. Servers MAY deliver objects that are addressed
+            to the <a href="#public-addressing">Public</a> special collection,
+            to additional inboxes, such as `sharedInbox` endpoints" .
           </p>
           <p>
             These fields will have been <a href="#client-addressing">
@@ -1908,7 +1832,7 @@ Location: https://dustycloud.org/likes/345
               recipient).
               The server MUST only target the values of <code>to</code>,
               <code>cc</code>, and/or <code>audience</code>
-              on the original object being forwarded, and not pick up any new
+              on the original activity being forwarded, and not pick up any new
               addressees whilst recursing through the linked objects
               (in case these addressees were purposefully amended by or via the client).
             </li>
@@ -1943,7 +1867,7 @@ Location: https://dustycloud.org/likes/345
           <p>
             Additionally, if an object is addressed to the
             <a href="#public-addressing">Public</a> special collection, a
-            server MAY deliver that object to all known
+            server MAY deliver that object to additional
             <code>sharedInbox</code> endpoints on the network.
           </p>
           <p>
@@ -2026,16 +1950,6 @@ Location: https://dustycloud.org/likes/345
           intermediate state.
           For example, a server might not send a <code>Reject</code> to protect
           a user's privacy.
-        </p>
-
-        <p>
-          In the case of receiving an <code>Accept</code> referencing this
-          <code>Follow</code> as the object, the server SHOULD add the
-          <code>actor</code> to the object actor's
-          <a href="#followers">Followers Collection</a>.
-          In the case of a <code>Reject</code>, the server MUST NOT add the
-          actor to the object actor's
-          <a href="#followers">Followers Collection</a>.
         </p>
 
         <div class="note">
@@ -2162,7 +2076,7 @@ Location: https://dustycloud.org/likes/345
         <p>
           The <code>Undo</code> activity is used to undo the side effects
           of previous activities.
-          See the ActivityStreams documentation on
+          See the Activity Streams documentation on
           <a href="https://www.w3.org/TR/activitystreams-vocabulary/#inverse">
             Inverse Activities and "Undo"</a>.
           The scope and restrictions of the <code>Undo</code> activity
@@ -2181,7 +2095,7 @@ Location: https://dustycloud.org/likes/345
         Building an international base of users is important in a federated
         network.
         <a href="https://www.w3.org/TR/activitystreams-core/#naturalLanguageValues">
-          ActivityStreams provides tooling for internationalization of content</a>,
+          Activity Streams provides tooling for internationalization of content</a>,
         which should be used whenever possible.
         However, it can be difficult for implementations to determine which
         <a href="https://www.w3.org/TR/activitystreams-core/#defaultlangcontext">
@@ -2269,7 +2183,7 @@ Location: https://dustycloud.org/likes/345
         <h2>Recursive Objects</h2>
         <p>
           Servers should set a limit on how deep to recurse while resolving objects,
-          or otherwise specially handle ActivityStreams objects with recursive
+          or otherwise specially handle Activity Streams objects with recursive
           references.
 	  Failure to properly do so may result in denial-of-service security
 	  vulnerabilities.
@@ -2379,12 +2293,12 @@ Location: https://dustycloud.org/likes/345
         from the ideas in the
         <a href="https://github.com/pump-io/pump.io/blob/master/API.md">Pump API</a>
         document, mostly as a complete rewrite of text, but sharing most of
-        the primary ideas while switching from ActivityStreams 1 to
-        ActivityStreams 2.
+        the primary ideas while switching from Activity Streams 1 to
+        Activity Streams 2.
       </p>
 
       <p>
-        Jessica Tallon and Christopher Lemmer Webber took over as editors when
+        Jessica Tallon and Christine Lemmer-Webber took over as editors when
         the standard moved to the W3C Social Working Group and did the majority
         of transition from Erin Shepherd's document to its current state as
         ActivityPub.
@@ -2399,8 +2313,7 @@ Location: https://dustycloud.org/likes/345
         than anyone to map the ideas across the different Social Working Group
         documents through her work on [[Social-Web-Protocols]].
         Amy also laid out the foundations for a significant refactoring of the
-        ActivityPub spec while sprinting for four days with Christopher Allan
-        Webber.
+        ActivityPub spec while sprinting for four days with Christine Lemmer-Webber.
         These revisions lead to cleaner separation between the client to server
         and server components, along with clarity about ActivityPub's relationship
         to [[LDN]], among many other improvements.
@@ -2446,12 +2359,12 @@ Location: https://dustycloud.org/likes/345
       <p>
         This section is non-normative.
       </p>
-      <li>
-        <ul><strong>2024-01-04</strong>: Include erratum allowing filtering in section 6.11.</ul>
-        <ul><strong>2024-01-04</strong>: Include erratum allowing filtering in section 7.1.1.</ul>
-        <ul><strong>2024-01-04</strong>: Include erratum allowing different ordering in collections in section 5.</ul>
-        <ul><strong>2024-01-04</strong>: Include erratum removing preferredUsername from list of natural-language-enabled properties in section 4.1.</ul>
-      </li>
+      <ul>
+        <li><strong>2024-01-04</strong>: Include erratum allowing filtering in section 6.11.</li>
+        <li><strong>2024-01-04</strong>: Include erratum allowing filtering in section 7.1.1.</li>
+        <li><strong>2024-01-04</strong>: Include erratum allowing different ordering in collections in section 5.</li>
+        <li><strong>2024-01-04</strong>: Include erratum removing preferredUsername from list of natural-language-enabled properties in section 4.1.</li>
+      </ul>
     </section>
   </body>
 </html>
